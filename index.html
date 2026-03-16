@@ -796,7 +796,8 @@ function getHashParam(key) {
 var token = getHashParam("t");
 // Allow access when: correct token OR running locally (file://) OR already authed this session
 var isLocal = window.location.protocol === "file:";
-var authorized = isLocal || (token === SECRET_TOKEN) || (sessionStorage.getItem("derech_auth") === SECRET_TOKEN);
+// var authorized = isLocal || (token === SECRET_TOKEN) || (sessionStorage.getItem("derech_auth") === SECRET_TOKEN);
+var authorized = true
 
 if (!authorized) {
   // Hide everything, show nothing
