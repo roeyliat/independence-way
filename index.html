@@ -1,0 +1,1247 @@
+<!DOCTYPE html>
+<html dir="rtl" lang="he">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>הדרך לעצמאות 🛒</title>
+<link href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;700;900&display=swap" rel="stylesheet">
+<style>
+:root{
+  --yellow:#FFD600;--yellow-d:#F9A825;
+  --green:#00C853;--green-d:#00A040;
+  --red:#FF3D00;--red-l:#FFF3F0;
+  --blue:#0288D1;--blue-l:#E1F5FE;
+  --orange:#FF6D00;--orange-l:#FFF8F0;
+  --teal:#00897B;--teal-l:#E0F2F1;
+  --purple:#6A1B9A;--purple-l:#F3E5F5;
+  --bg:#F5F0E8;
+  --white:#FFFEF7;
+  --dark:#1A1A1A;
+  --gray:#666;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:'Heebo',sans-serif;direction:rtl;background:var(--bg);color:var(--dark);min-height:100vh;overflow-x:hidden}
+
+/* ── TOP STORE BANNER ── */
+.store-banner{
+  background:var(--yellow);
+  border-bottom:5px solid var(--yellow-d);
+  padding:0 20px;
+  display:flex;align-items:center;justify-content:space-between;
+  height:64px;
+  position:sticky;top:0;z-index:100;
+  box-shadow:0 4px 12px rgba(0,0,0,0.15);
+}
+.store-logo{
+  font-size:24px;font-weight:900;color:var(--dark);
+  display:flex;align-items:center;gap:10px;
+}
+.store-logo-icon{font-size:30px}
+.store-tagline{font-size:12px;font-weight:700;color:rgba(0,0,0,0.5);display:block;margin-top:-3px}
+.store-cart{
+  background:var(--dark);color:var(--yellow);
+  border-radius:50%;width:46px;height:46px;
+  display:flex;align-items:center;justify-content:center;
+  font-size:22px;cursor:pointer;
+  box-shadow:0 3px 8px rgba(0,0,0,0.3);
+  transition:transform 0.15s;
+}
+.store-cart:hover{transform:scale(1.1)}
+
+/* ── TICKER TAPE ── */
+.ticker{background:var(--dark);color:var(--yellow);padding:8px 0;overflow:hidden;white-space:nowrap;font-size:14px;font-weight:700;letter-spacing:0.3px}
+.ticker-inner{display:inline-block;animation:ticker 25s linear infinite}
+.ticker-item{display:inline-block;margin-left:60px}
+.ticker-item::before{content:'★  ';color:var(--yellow-d)}
+@keyframes ticker{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+
+/* ── HERO ── */
+.hero{
+  background:linear-gradient(160deg,var(--yellow) 0%,#FFE066 50%,#FFF9C4 100%);
+  padding:32px 20px 28px;
+  text-align:center;
+  position:relative;
+  overflow:hidden;
+  border-bottom:4px solid var(--yellow-d);
+}
+.hero::before{
+  content:'₪';
+  position:absolute;font-size:280px;font-weight:900;
+  color:rgba(0,0,0,0.04);top:-40px;left:-40px;line-height:1;
+}
+.hero::after{
+  content:'🛒';
+  position:absolute;font-size:120px;bottom:-20px;left:20px;opacity:0.12;
+}
+.hero-label{
+  display:inline-block;background:var(--dark);color:var(--yellow);
+  border-radius:6px;padding:4px 14px;font-size:13px;font-weight:700;
+  margin-bottom:14px;letter-spacing:0.5px;
+  box-shadow:3px 3px 0 rgba(0,0,0,0.2);
+}
+.hero-title{
+  font-size:clamp(42px,10vw,80px);font-weight:900;
+  line-height:1;color:var(--dark);margin-bottom:8px;
+  text-shadow:4px 4px 0 rgba(0,0,0,0.1);
+}
+.hero-title .shekel{color:var(--green-d)}
+.hero-sub{
+  font-size:17px;color:rgba(0,0,0,0.65);
+  max-width:420px;margin:0 auto 26px;line-height:1.5;
+}
+.hero-coins{
+  display:flex;align-items:center;justify-content:center;
+  gap:8px;flex-wrap:wrap;
+}
+.coin-badge{
+  background:var(--white);border:3px solid var(--dark);
+  border-radius:50px;padding:8px 18px;
+  font-size:15px;font-weight:700;color:var(--dark);
+  box-shadow:3px 3px 0 var(--dark);
+  animation:coinBounce 0.5s cubic-bezier(.4,2,.4,1) both;
+}
+.coin-badge:nth-child(1){animation-delay:.1s}
+.coin-badge:nth-child(2){animation-delay:.18s}
+.coin-badge:nth-child(3){animation-delay:.26s}
+.coin-badge:nth-child(4){animation-delay:.34s}
+
+/* ── PROGRESS TRACKER ── */
+.tracker-section{
+  background:var(--dark);
+  padding:20px;margin:0;
+}
+.tracker-title{color:var(--yellow);font-size:16px;font-weight:700;text-align:center;margin-bottom:14px}
+.tracker-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;max-width:520px;margin:0 auto}
+.tcell{
+  background:#2a2a2a;border:2.5px solid #333;border-radius:14px;
+  padding:12px 8px;text-align:center;cursor:pointer;
+  transition:all 0.2s;
+}
+.tcell:hover{border-color:#555;background:#333}
+.tcell.done{background:#003d20;border-color:var(--green);animation:checkPop 0.35s cubic-bezier(.4,2,.4,1)}
+.tc-emoji{font-size:22px;margin-bottom:5px;display:block}
+.tc-name{font-size:12px;color:#aaa;font-weight:700;line-height:1.3}
+.tc-check{
+  width:20px;height:20px;border-radius:50%;border:2px solid #444;
+  background:transparent;margin:6px auto 0;
+  display:flex;align-items:center;justify-content:center;
+  font-size:11px;color:transparent;transition:all 0.2s;
+}
+.tcell.done .tc-check{background:var(--green);border-color:var(--green);color:#fff}
+
+/* ── AISLE LABELS ── */
+.aisle-label{
+  display:flex;align-items:center;gap:12px;
+  margin:28px 0 14px;padding:0 16px;
+}
+.aisle-sign{
+  background:var(--dark);color:var(--yellow);
+  font-size:14px;font-weight:700;
+  padding:6px 16px;border-radius:4px;
+  white-space:nowrap;
+  box-shadow:2px 2px 0 rgba(0,0,0,0.3);
+  letter-spacing:0.5px;
+}
+.aisle-line{flex:1;height:2px;background:rgba(0,0,0,0.12);border-radius:1px}
+
+/* ── GAME CARDS (price-tag style) ── */
+.shelf{padding:0 16px;max-width:680px;margin:0 auto}
+.game-card{
+  background:var(--white);
+  border-radius:16px;
+  margin-bottom:14px;
+  border:2px solid rgba(0,0,0,0.08);
+  overflow:hidden;
+  box-shadow:0 4px 0 rgba(0,0,0,0.12),0 8px 24px rgba(0,0,0,0.06);
+  transition:transform 0.15s,box-shadow 0.15s;
+  animation:slideIn 0.4s cubic-bezier(.4,2,.4,1) both;
+}
+.game-card:nth-child(1){animation-delay:.04s}
+.game-card:nth-child(2){animation-delay:.08s}
+.game-card:nth-child(3){animation-delay:.12s}
+.game-card:nth-child(4){animation-delay:.16s}
+.game-card:nth-child(5){animation-delay:.20s}
+.game-card:hover{transform:translateY(-3px);box-shadow:0 7px 0 rgba(0,0,0,0.12),0 14px 32px rgba(0,0,0,0.1)}
+
+.card-top{
+  display:flex;align-items:center;gap:14px;
+  padding:16px 18px 12px;cursor:pointer;user-select:none;
+}
+.card-icon-wrap{
+  width:58px;height:58px;border-radius:14px;
+  display:flex;align-items:center;justify-content:center;
+  font-size:30px;flex-shrink:0;border:2px solid rgba(0,0,0,0.08);
+}
+.card-info{flex:1}
+.card-title{font-size:18px;font-weight:900;color:var(--dark);margin-bottom:3px}
+.card-subtitle{font-size:13px;color:var(--gray)}
+.price-tag{
+  background:var(--yellow);border:2px solid var(--yellow-d);
+  border-radius:8px;padding:5px 10px;text-align:center;
+  flex-shrink:0;min-width:54px;
+  box-shadow:2px 2px 0 rgba(0,0,0,0.15);
+}
+.price-tag-num{font-size:18px;font-weight:900;color:var(--dark);line-height:1}
+.price-tag-lbl{font-size:9px;color:rgba(0,0,0,0.5);font-weight:700}
+.card-chevron{font-size:18px;color:#ccc;margin-right:4px;transition:transform 0.25s;flex-shrink:0}
+.game-card.open .card-chevron{transform:rotate(180deg)}
+
+/* COLOR STRIPES */
+.stripe{height:5px;width:100%}
+.s-yellow{background:var(--yellow)}
+.s-green{background:var(--green)}
+.s-orange{background:var(--orange)}
+.s-blue{background:var(--blue)}
+.s-teal{background:var(--teal)}
+.s-purple{background:var(--purple)}
+
+/* CARD BODY */
+.card-body{display:none;padding:0 18px 18px}
+.game-card.open .card-body{display:block}
+.card-desc{
+  font-size:13px;color:var(--gray);line-height:1.7;
+  background:#F8F8F5;border-radius:10px;padding:10px 14px;
+  margin-bottom:14px;border-right:3px solid currentColor;
+}
+.cd-yellow{border-color:var(--yellow-d)}
+.cd-green{border-color:var(--green)}
+.cd-orange{border-color:var(--orange)}
+.cd-blue{border-color:var(--blue)}
+.cd-teal{border-color:var(--teal)}
+.cd-purple{border-color:var(--purple)}
+
+/* GAME LINKS */
+.game-link{
+  display:flex;align-items:center;gap:12px;
+  background:var(--white);border:2px solid rgba(0,0,0,0.1);
+  border-radius:12px;padding:12px 14px;
+  text-decoration:none;color:var(--dark);
+  transition:all 0.15s;margin-bottom:8px;
+}
+.game-link:hover{border-color:rgba(0,0,0,0.25);background:#FFFDF5;transform:translateX(-2px)}
+.gl-icon{font-size:24px;flex-shrink:0}
+.gl-info{flex:1}
+.gl-name{font-size:15px;font-weight:700;margin-bottom:2px}
+.gl-desc{font-size:12px;color:var(--gray)}
+.gl-tags{display:flex;gap:5px;margin-top:5px;flex-wrap:wrap}
+.gl-tag{
+  font-size:11px;font-weight:700;padding:2px 8px;border-radius:4px;
+}
+.gt-yellow{background:#FFF9C4;color:#7A6000;border:1px solid #FFD600}
+.gt-green{background:#E8F5E9;color:#2E7D32;border:1px solid #66BB6A}
+.gt-blue{background:#E3F2FD;color:#1565C0;border:1px solid #64B5F6}
+.gt-orange{background:#FFF3E0;color:#E65100;border:1px solid #FF9800}
+.gt-teal{background:#E0F2F1;color:#00695C;border:1px solid #4DB6AC}
+.gl-arrow{
+  width:34px;height:34px;border-radius:8px;
+  background:var(--dark);color:var(--yellow);
+  display:flex;align-items:center;justify-content:center;
+  font-size:16px;flex-shrink:0;transition:transform 0.15s;
+}
+.game-link:hover .gl-arrow{transform:translateX(-3px)}
+
+/* SUB MINI CARDS */
+.mini-row{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:8px}
+.mini-card{
+  display:flex;align-items:center;gap:8px;
+  background:#F8F8F5;border:1.5px solid rgba(0,0,0,0.08);
+  border-radius:10px;padding:10px 12px;
+  text-decoration:none;color:var(--dark);
+  transition:all 0.15s;
+}
+.mini-card:hover{background:#FFFDF5;border-color:rgba(0,0,0,0.18)}
+.mini-card-icon{font-size:20px;flex-shrink:0}
+.mc-name{font-size:13px;font-weight:700}
+.mc-cnt{font-size:11px;color:var(--gray)}
+
+/* SKILLS */
+.skills-row{display:flex;gap:6px;flex-wrap:wrap;padding-top:12px;border-top:1.5px solid #F0EEE5;margin-top:12px}
+.skill-chip{
+  display:flex;align-items:center;gap:5px;
+  background:#F0EEE5;border-radius:20px;
+  padding:4px 12px;font-size:12px;color:#555;font-weight:700;
+}
+.skill-dot{width:6px;height:6px;border-radius:50%;flex-shrink:0}
+
+/* TEACHER NOTE */
+.teacher-wrap{padding:0 16px;max-width:680px;margin:16px auto 0}
+.teacher-note{
+  background:var(--dark);color:#aaa;
+  border-radius:14px;padding:14px 18px;
+  font-size:13px;line-height:1.6;
+}
+.teacher-note strong{color:var(--yellow);display:block;margin-bottom:4px;font-size:14px}
+
+/* FOOTER */
+.footer{
+  background:var(--dark);margin-top:32px;
+  padding:24px 20px 18px;text-align:center;
+}
+.footer-logo{font-size:28px;font-weight:900;color:var(--yellow);margin-bottom:6px}
+.footer-copy{font-size:14px;font-weight:700;color:var(--yellow);margin-bottom:4px}
+.footer-sub{font-size:12px;color:#666}
+
+/* ── ANIMATIONS ── */
+@keyframes coinBounce{from{opacity:0;transform:scale(0.5) rotate(-10deg)}to{opacity:1;transform:scale(1) rotate(0)}}
+@keyframes slideIn{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+@keyframes checkPop{0%{transform:scale(1)}40%{transform:scale(1.08)}100%{transform:scale(1)}}
+</style>
+<style>
+/* Lemon Ninja overlay */
+#lemon-overlay{
+  display:none;position:fixed;inset:0;z-index:500;
+  background:linear-gradient(160deg,#0d1b2a 0%,#1a2744 50%,#0d1b2a 100%);
+  flex-direction:column;font-family:'Heebo',sans-serif;direction:rtl;
+  overflow:hidden;
+}
+#lemon-overlay.active{display:flex}
+
+/* HUD */
+.ln-hud{
+  padding:10px 16px 8px;
+  background:rgba(0,0,0,0.35);
+  border-bottom:2px solid rgba(255,255,255,0.07);
+  flex-shrink:0;
+}
+.ln-levels{display:flex;gap:6px;justify-content:center;margin-bottom:8px}
+.ln-lvl{
+  padding:4px 14px;border-radius:20px;font-size:13px;font-weight:700;
+  transition:all 0.3s;border:2px solid transparent;
+}
+.ln-money-row{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:6px}
+.ln-money-lbl{font-size:13px;color:rgba(255,255,255,0.5);font-weight:700}
+.ln-money-val{font-size:28px;font-weight:900;color:#FFD600;text-shadow:0 0 20px rgba(255,214,0,0.5)}
+.ln-bar-wrap{height:18px;background:rgba(255,255,255,0.08);border-radius:9px;overflow:hidden;border:1px solid rgba(255,255,255,0.1)}
+.ln-bar-fill{
+  height:100%;border-radius:9px;
+  background:linear-gradient(90deg,#4CAF50,#FF9800,#f44336);
+  background-size:300% 100%;
+  transition:width 0.4s cubic-bezier(.4,2,.4,1);
+  box-shadow:0 0 10px rgba(255,214,0,0.4);
+  position:relative;overflow:hidden;
+}
+.ln-bar-shine{
+  position:absolute;inset:0;
+  background:linear-gradient(90deg,transparent,rgba(255,255,255,0.3),transparent);
+  border-radius:9px;animation:lnShimmer 1.5s ease infinite;
+}
+.ln-combo{text-align:center;margin-top:4px;font-size:13px;font-weight:900;min-height:20px}
+.ln-close-btn{
+  position:absolute;top:10px;left:12px;
+  width:36px;height:36px;border-radius:50%;
+  background:rgba(255,255,255,0.1);border:none;
+  color:#fff;font-size:20px;cursor:pointer;
+  display:flex;align-items:center;justify-content:center;
+  z-index:10;transition:background 0.15s;
+}
+.ln-close-btn:hover{background:rgba(255,255,255,0.2)}
+
+/* Play area */
+.ln-arena{flex:1;position:relative;overflow:hidden;cursor:crosshair}
+
+/* Lemons */
+.ln-lemon{
+  position:absolute;cursor:pointer;
+  touch-action:none;user-select:none;-webkit-user-select:none;
+  display:flex;align-items:center;justify-content:center;
+  transform:translate(-50%,-50%);
+  z-index:10;
+}
+.ln-lemon img{display:block;pointer-events:none;filter:drop-shadow(0 4px 8px rgba(0,0,0,0.5))}
+.ln-lemon.sliced img{
+  animation:lnSlice 0.35s ease forwards;
+}
+.ln-pop{
+  position:absolute;z-index:50;font-weight:900;pointer-events:none;
+  white-space:nowrap;text-shadow:0 2px 8px rgba(0,0,0,0.9);
+  animation:lnFloat 0.7s ease forwards;
+  font-family:'Heebo',sans-serif;
+}
+
+/* Stars bg */
+.ln-star{position:absolute;border-radius:50%;background:rgba(255,255,255,0.15);animation:lnShimmer 3s ease infinite}
+
+/* Overlays */
+.ln-overlay{
+  position:absolute;inset:0;z-index:100;
+  background:rgba(0,0,0,0.85);
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  gap:14px;padding:20px;text-align:center;
+}
+.ln-ov-icon{font-size:72px;animation:lnSpin 1.5s ease infinite}
+.ln-ov-title{font-size:34px;font-weight:900;color:#FFD600;text-shadow:0 0 30px rgba(255,214,0,0.8)}
+.ln-ov-sub{font-size:16px;color:rgba(255,255,255,0.7);line-height:1.5;max-width:280px}
+.ln-ov-money{font-size:48px;font-weight:900;color:#fff;text-shadow:0 0 20px rgba(255,214,0,0.5)}
+.ln-ov-btn{
+  padding:16px 36px;border-radius:16px;border:none;
+  font-size:19px;font-weight:900;cursor:pointer;font-family:'Heebo',sans-serif;
+  box-shadow:0 6px 0 rgba(0,0,0,0.3);transition:transform 0.1s;
+}
+.ln-ov-btn:active{transform:translateY(4px);box-shadow:0 2px 0 rgba(0,0,0,0.3)}
+.ln-ov-btn2{
+  padding:11px 24px;border-radius:12px;border:2px solid rgba(255,255,255,0.2);
+  background:transparent;color:rgba(255,255,255,0.6);font-size:14px;font-weight:700;
+  cursor:pointer;font-family:'Heebo',sans-serif;
+}
+
+/* Bottom bar */
+.ln-footer{
+  padding:8px 16px;background:rgba(0,0,0,0.3);
+  border-top:1px solid rgba(255,255,255,0.06);
+  display:flex;align-items:center;justify-content:space-between;flex-shrink:0;
+  font-size:13px;color:rgba(255,255,255,0.4);font-weight:700;
+}
+
+/* Entry card on landing */
+.lemon-entry-card{
+  background:linear-gradient(135deg,#0d1b2a,#1a2744);
+  border:2px solid #1a3a6a;border-radius:16px;
+  padding:16px;margin-bottom:12px;
+  display:flex;align-items:center;gap:14px;
+  cursor:pointer;transition:all 0.2s;
+  box-shadow:0 4px 0 rgba(0,0,0,0.3);
+}
+.lemon-entry-card:hover{border-color:#4a7aaa;transform:translateY(-2px);box-shadow:0 7px 0 rgba(0,0,0,0.3)}
+.lemon-entry-icon{font-size:42px;flex-shrink:0}
+.lemon-entry-info{flex:1}
+.lemon-entry-title{font-size:17px;font-weight:900;color:#FFD600;margin-bottom:3px}
+.lemon-entry-sub{font-size:12px;color:rgba(255,255,255,0.5);line-height:1.4}
+.lemon-entry-wallet{
+  background:rgba(255,214,0,0.12);border:2px solid rgba(255,214,0,0.3);
+  border-radius:12px;padding:8px 14px;text-align:center;flex-shrink:0;
+}
+.lemon-wallet-num{font-size:20px;font-weight:900;color:#FFD600}
+.lemon-wallet-lbl{font-size:10px;color:rgba(255,214,0,0.6);font-weight:700}
+.lemon-play-btn{
+  background:#FFD600;color:#1a1a1a;border:none;border-radius:12px;
+  padding:10px 18px;font-size:15px;font-weight:900;cursor:pointer;font-family:inherit;
+  box-shadow:0 3px 0 #F9A825;flex-shrink:0;white-space:nowrap;
+}
+.lemon-play-btn:active{transform:translateY(2px);box-shadow:0 1px 0 #F9A825}
+
+@keyframes lnShimmer{0%,100%{opacity:0.5}50%{opacity:1}}
+@keyframes lnFloat{0%{opacity:1;transform:translateY(0) scale(1)}100%{opacity:0;transform:translateY(-55px) scale(1.3)}}
+@keyframes lnSlice{0%{transform:scale(1) rotate(0deg);opacity:1}100%{transform:scale(1.5) rotate(25deg);opacity:0}}
+@keyframes lnSpin{0%{transform:rotate(0deg) scale(1)}50%{transform:rotate(180deg) scale(1.15)}100%{transform:rotate(360deg) scale(1)}}
+@keyframes lnPop{0%{opacity:0;transform:scale(0.5)}60%{transform:scale(1.1)}100%{opacity:1;transform:scale(1)}}
+</style>
+</head>
+<body>
+
+<!-- STORE BANNER -->
+<div class="store-banner">
+  <div class="store-logo">
+    <span class="store-logo-icon">🛒</span>
+    <div>
+      הדרך לעצמאות
+      <span class="store-tagline">כישורי חיים · ריפוי בעיסוק</span>
+    </div>
+  </div>
+  <div class="store-cart" onclick="window.scrollTo({top:0,behavior:'smooth'})">🛒</div>
+  <div id="user-chip" onclick="logout()" title="החלף שחקן" style="display:none;align-items:center;gap:6px;background:#1A1A1A;color:#FFD600;border-radius:30px;padding:7px 14px;font-size:14px;font-weight:700;cursor:pointer;border:2px solid #333">👤 <span id="user-name"></span> ↩</div>
+</div>
+
+<!-- TICKER -->
+<div class="ticker">
+  <div class="ticker-inner">
+    <span class="ticker-item">מיחזור בקבוקים</span>
+    <span class="ticker-item">זיהוי מטבעות</span>
+    <span class="ticker-item">השוואת מחירים</span>
+    <span class="ticker-item">קניות חכמות</span>
+    <span class="ticker-item">שלם בקופה</span>
+    <span class="ticker-item">קבל עודף</span>
+    <span class="ticker-item">מיחזור בקבוקים</span>
+    <span class="ticker-item">זיהוי מטבעות</span>
+    <span class="ticker-item">השוואת מחירים</span>
+    <span class="ticker-item">קניות חכמות</span>
+    <span class="ticker-item">שלם בקופה</span>
+    <span class="ticker-item">קבל עודף</span>
+  </div>
+</div>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-label">כישורי חיים · ריפוי בעיסוק · לי-את רטנר</div>
+  <h1 class="hero-title">הדרך<br><span class="shekel">לעצמאות</span></h1>
+  <p class="hero-sub">לומדים לנהל כסף ולקנות חכם — עם משחקים מהחיים האמיתיים!</p>
+  <div id="hero-welcome" style="display:none;background:#1A1A1A;color:#FFD600;border-radius:30px;padding:10px 22px;font-size:17px;font-weight:900;box-shadow:4px 4px 0 rgba(0,0,0,0.3);margin-bottom:16px"></div>
+  <div class="hero-coins">
+    <div class="coin-badge">🪙 מטבעות</div>
+    <div class="coin-badge">🏷️ מחירים</div>
+    <div class="coin-badge">🛍️ קניות</div>
+    <div class="coin-badge">💰 עודף</div>
+  </div>
+</div>
+
+<!-- PROGRESS TRACKER -->
+<div class="tracker-section">
+  <div class="tracker-title">⭐ מעקב התקדמות — לחץ כשסיימת שלב!</div>
+  <div class="tracker-grid">
+    <div class="tcell" onclick="toggleDone(this)">
+      <span class="tc-emoji">♻️</span>
+      <div class="tc-name">מיחזור</div>
+      <div class="tc-check">✓</div>
+    </div>
+    <div class="tcell" onclick="toggleDone(this)">
+      <span class="tc-emoji">🪙</span>
+      <div class="tc-name">מטבעות</div>
+      <div class="tc-check">✓</div>
+    </div>
+    <div class="tcell" onclick="toggleDone(this)">
+      <span class="tc-emoji">⚖️</span>
+      <div class="tc-name">השוואה</div>
+      <div class="tc-check">✓</div>
+    </div>
+    <div class="tcell" onclick="toggleDone(this)">
+      <span class="tc-emoji">🔍</span>
+      <div class="tc-name">מציאת הזול</div>
+      <div class="tc-check">✓</div>
+    </div>
+    <div class="tcell" onclick="toggleDone(this)">
+      <span class="tc-emoji">🛒</span>
+      <div class="tc-name">קניות</div>
+      <div class="tc-check">✓</div>
+    </div>
+    <div class="tcell" onclick="toggleDone(this)">
+      <span class="tc-emoji">🏪</span>
+      <div class="tc-name">קופה</div>
+      <div class="tc-check">✓</div>
+    </div>
+  </div>
+</div>
+
+<!-- CARDS -->
+<div class="shelf">
+
+  <!-- AISLE 1 -->
+  <div class="aisle-label">
+    <div class="aisle-sign">מחלקה 1 — עבודה וחיסכון</div>
+    <div class="aisle-line"></div>
+  </div>
+
+  <!-- RECYCLING -->
+  <div class="game-card" id="c0">
+    <div class="stripe s-green"></div>
+    <div class="card-top" onclick="toggleCard('c0')">
+      <div class="card-icon-wrap" style="background:#E8F5E9">♻️</div>
+      <div class="card-info">
+        <div class="card-title">מיחזור בקבוקים</div>
+        <div class="card-subtitle">מוצא בקבוקים → מרוויח כסף אמיתי לארנק</div>
+      </div>
+      <div class="price-tag"><div class="price-tag-num">0.30₪</div><div class="price-tag-lbl">לבקבוק</div></div>
+      <div class="card-chevron">▾</div>
+    </div>
+    <div class="card-body">
+      <div class="card-desc cd-green">מצא 10 בקבוקים ופחיות מוסתרים בתמונה, אסוף אותם — ומרוויח 30 אגורות לכל בקבוק! אחרי 5 סבבים אפשר ללכת לקנות.</div>
+      <a href="recycling-game.html" class="game-link">
+        <span class="gl-icon">🌳</span>
+        <div class="gl-info">
+          <div class="gl-name">פארק שכונתי — שלב 1</div>
+          <div class="gl-desc">Login אישי · הארנק נשמר · 5 סבבים</div>
+          <div class="gl-tags">
+            <span class="gl-tag gt-green">17 בקבוקים</span>
+            <span class="gl-tag gt-orange">ארנק אישי</span>
+          </div>
+        </div>
+        <div class="gl-arrow">←</div>
+      </a>
+      <div class="skills-row">
+        <div class="skill-chip"><span class="skill-dot" style="background:var(--green)"></span>סריקה ויזואלית</div>
+        <div class="skill-chip"><span class="skill-dot" style="background:var(--green)"></span>מוטוריקה</div>
+        <div class="skill-chip"><span class="skill-dot" style="background:var(--green)"></span>ניהול כסף</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- AISLE 2 -->
+  <div class="aisle-label">
+    <div class="aisle-sign">מחלקה 2 — כסף ישראלי</div>
+    <div class="aisle-line"></div>
+  </div>
+
+  <!-- COINS -->
+  <div class="game-card" id="c1">
+    <div class="stripe s-yellow"></div>
+    <div class="card-top" onclick="toggleCard('c1')">
+      <div class="card-icon-wrap" style="background:#FFFDE7">🪙</div>
+      <div class="card-info">
+        <div class="card-title">מטבעות ושטרות</div>
+        <div class="card-subtitle">מכירים את הכסף הישראלי</div>
+      </div>
+      <div class="price-tag"><div class="price-tag-num">5</div><div class="price-tag-lbl">שלבים</div></div>
+      <div class="card-chevron">▾</div>
+    </div>
+    <div class="card-body">
+      <div class="card-desc cd-yellow">זיהוי מטבעות ושטרות בתמונות אמיתיות — מ-10 אגורות עד 200₪. משחק מלא עם 5 שלבים: לימונדה, מיחזור, קניות, קופה ושקית.</div>
+      <a href="grocery-derech-atzmaut-final.html" class="game-link">
+        <span class="gl-icon">🪙</span>
+        <div class="gl-info">
+          <div class="gl-name">זיהוי כסף + מכולת מלאה</div>
+          <div class="gl-desc">התאם מטבע לערכו · 5 שלבים · משחק אינסופי</div>
+          <div class="gl-tags">
+            <span class="gl-tag gt-yellow">תמונות אמיתיות</span>
+            <span class="gl-tag gt-green">5 שלבים</span>
+          </div>
+        </div>
+        <div class="gl-arrow">←</div>
+      </a>
+      <div class="skills-row">
+        <div class="skill-chip"><span class="skill-dot" style="background:var(--yellow-d)"></span>זיהוי ערכים</div>
+        <div class="skill-chip"><span class="skill-dot" style="background:var(--yellow-d)"></span>השוואה ויזואלית</div>
+        <div class="skill-chip"><span class="skill-dot" style="background:var(--yellow-d)"></span>ADL</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- AISLE 3 -->
+  <div class="aisle-label">
+    <div class="aisle-sign">מחלקה 3 — השוואת מחירים</div>
+    <div class="aisle-line"></div>
+  </div>
+
+  <!-- COMPARE -->
+  <div class="game-card" id="c2">
+    <div class="stripe s-orange"></div>
+    <div class="card-top" onclick="toggleCard('c2')">
+      <div class="card-icon-wrap" style="background:#FFF3E0">🏷️</div>
+      <div class="card-info">
+        <div class="card-title">הקונה החכם — שלב 1</div>
+        <div class="card-subtitle">מוצא את הכי זול בין 2-3 מוצרים</div>
+      </div>
+      <div class="price-tag" style="background:#FF6D00;border-color:#E65100"><div class="price-tag-num" style="color:#fff">זול!</div><div class="price-tag-lbl" style="color:rgba(255,255,255,0.7)">מוצאים</div></div>
+      <div class="card-chevron">▾</div>
+    </div>
+    <div class="card-body">
+      <div class="card-desc cd-orange">מתאמנים להשוות מחירים של 2-3 מוצרים עם מחירים אקראיים. מתרגלים על תמונות מהמכולת האמיתית שלנו!</div>
+      <a href="price-comparison-game.html" class="game-link">
+        <span class="gl-icon">🛒</span>
+        <div class="gl-info">
+          <div class="gl-name">השוואת מחירים — 3 מוצרים</div>
+          <div class="gl-desc">לחץ על הכי זול · טיימר · 4 מחלקות</div>
+          <div class="gl-tags">
+            <span class="gl-tag gt-orange">מחירים אמיתיים</span>
+            <span class="gl-tag gt-blue">טיימר</span>
+          </div>
+        </div>
+        <div class="gl-arrow">←</div>
+      </a>
+      <a href="stage2-find-cheapest.html" class="game-link">
+        <span class="gl-icon">🔍</span>
+        <div class="gl-info">
+          <div class="gl-name">מציאת הזול — מדף מלא</div>
+          <div class="gl-desc">כל המדף גלוי · הסחות דעת · 3 רמזים</div>
+          <div class="gl-tags">
+            <span class="gl-tag gt-orange">מדף שלם</span>
+            <span class="gl-tag gt-green">רמזים</span>
+          </div>
+        </div>
+        <div class="gl-arrow">←</div>
+      </a>
+      <div class="skills-row">
+        <div class="skill-chip"><span class="skill-dot" style="background:var(--orange)"></span>השוואת מחירים</div>
+        <div class="skill-chip"><span class="skill-dot" style="background:var(--orange)"></span>קבלת החלטות</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- AISLE 4 -->
+  <div class="aisle-label">
+    <div class="aisle-sign">מחלקה 4 — קניות עצמאיות</div>
+    <div class="aisle-line"></div>
+  </div>
+
+  <!-- SHOPPING -->
+  <div class="game-card" id="c3">
+    <div class="stripe s-blue"></div>
+    <div class="card-top" onclick="toggleCard('c3')">
+      <div class="card-icon-wrap" style="background:#E3F2FD">🛍️</div>
+      <div class="card-info">
+        <div class="card-title">קניות עם רשימה</div>
+        <div class="card-subtitle">עוברים בין מחלקות ומוצאים את הזול</div>
+      </div>
+      <div class="price-tag" style="background:var(--blue);border-color:#0277BD"><div class="price-tag-num" style="color:#fff">⏱</div><div class="price-tag-lbl" style="color:rgba(255,255,255,0.7)">מהירות</div></div>
+      <div class="card-chevron">▾</div>
+    </div>
+    <div class="card-body">
+      <div class="card-desc cd-blue">מקבלים רשימת קניות ועוברים בין מחלקת חלב לפירות וירקות. מטרה: למצוא כל מוצר כמה שיותר מהר — ולקנות את הזול!</div>
+      <a href="shopping-game-stage2.html" class="game-link">
+        <span class="gl-icon">🛍️</span>
+        <div class="gl-info">
+          <div class="gl-name">קניות חכמות — מסע בין מחלקות</div>
+          <div class="gl-desc">רשימת קניות ← חלב + ירקות ← קבלה + זמן</div>
+          <div class="gl-tags">
+            <span class="gl-tag gt-blue">🥛 חלב</span>
+            <span class="gl-tag gt-green">🥕 ירקות</span>
+            <span class="gl-tag gt-orange">⏱ מירוץ</span>
+          </div>
+        </div>
+        <div class="gl-arrow">←</div>
+      </a>
+      <div class="mini-row">
+        <a href="shopping-game-stage2.html#dairy" class="mini-card">
+          <span class="mini-card-icon">🥛</span>
+          <div><div class="mc-name">רק חלב</div><div class="mc-cnt">24 מוצרים</div></div>
+        </a>
+        <a href="shopping-game-stage2.html#veg" class="mini-card">
+          <span class="mini-card-icon">🥕</span>
+          <div><div class="mc-name">רק ירקות</div><div class="mc-cnt">25 מוצרים</div></div>
+        </a>
+      </div>
+      <div class="skills-row">
+        <div class="skill-chip"><span class="skill-dot" style="background:var(--blue)"></span>ניהול רשימה</div>
+        <div class="skill-chip"><span class="skill-dot" style="background:var(--blue)"></span>מהירות ביצוע</div>
+        <div class="skill-chip"><span class="skill-dot" style="background:var(--blue)"></span>חישוב תקציב</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- AISLE 5 -->
+  <div class="aisle-label">
+    <div class="aisle-sign">מחלקה 5 — קופה ועודף</div>
+    <div class="aisle-line"></div>
+  </div>
+
+  <!-- CHECKOUT -->
+  <div class="game-card" id="c4">
+    <div class="stripe s-purple"></div>
+    <div class="card-top" onclick="toggleCard('c4')">
+      <div class="card-icon-wrap" style="background:#F3E5F5">🏪</div>
+      <div class="card-info">
+        <div class="card-title">שלם בקופה</div>
+        <div class="card-subtitle">גרור מטבעות לתשלום · קבל עודף חזרה</div>
+      </div>
+      <div class="price-tag" style="background:var(--purple);border-color:#4A148C"><div class="price-tag-num" style="color:#fff;font-size:14px">עודף</div><div class="price-tag-lbl" style="color:rgba(255,255,255,0.7)">₪ ←</div></div>
+      <div class="card-chevron">▾</div>
+    </div>
+    <div class="card-body">
+      <div class="card-desc cd-purple">POV של עמידה בקופה — גוררים מטבעות ושטרות לתשלום. הקופאי/ת מחזיר/ה עודף ומוכרח לאסוף אותו חזרה לארנק!</div>
+      <a href="checkout-stage.jsx" class="game-link">
+        <span class="gl-icon">💳</span>
+        <div class="gl-info">
+          <div class="gl-name">קופה ועודף — React</div>
+          <div class="gl-desc">חשבונות אקראיים · גרור מטבעות · עודף ויזואלי</div>
+          <div class="gl-tags">
+            <span class="gl-tag gt-teal">drag & drop</span>
+            <span class="gl-tag gt-orange">תמונות אמיתיות</span>
+          </div>
+        </div>
+        <div class="gl-arrow">←</div>
+      </a>
+      <div class="skills-row">
+        <div class="skill-chip"><span class="skill-dot" style="background:var(--purple)"></span>חישוב עודף</div>
+        <div class="skill-chip"><span class="skill-dot" style="background:var(--purple)"></span>זיהוי מטבעות</div>
+        <div class="skill-chip"><span class="skill-dot" style="background:var(--purple)"></span>מוטוריקה</div>
+      </div>
+    </div>
+  </div>
+
+</div><!-- /shelf -->
+
+<!-- TEACHER NOTE -->
+<div class="teacher-wrap">
+  <div class="teacher-note">
+    <strong>💡 הנחיה לצוות הטיפולי</strong>
+    ניתן להיכנס לכל שלב בנפרד לתרגול ממוקד. שלב המיחזור שומר ארנק אישי לכל תלמיד.
+    מומלץ לעבור לפי הסדר בפעם הראשונה. כל משחק שומר ניקוד וחיסכון לצורך הערכה.
+  </div>
+</div>
+
+<!-- FOOTER -->
+<div class="footer">
+  <div class="footer-logo">🛒 הדרך לעצמאות</div>
+  <div class="footer-copy">© כל הזכויות שמורות ללי-את רטנר 2026</div>
+  <div class="footer-sub">כישורי חיים · ריפוי בעיסוק · לי-את רטנר</div>
+</div>
+
+<script>
+function toggleCard(id){
+  var c=document.getElementById(id);
+  c.classList.toggle('open');
+}
+function toggleDone(el){
+  el.classList.toggle('done');
+  try{
+    var s={};
+    document.querySelectorAll('.tcell').forEach(function(c,i){s[i]=c.classList.contains('done');});
+    localStorage.setItem('derech_v2',JSON.stringify(s));
+  }catch(e){}
+}
+try{
+  var sv=JSON.parse(localStorage.getItem('derech_v2')||'{}');
+  document.querySelectorAll('.tcell').forEach(function(c,i){if(sv[i])c.classList.add('done');});
+}catch(e){}
+toggleCard('c0');
+</script>
+
+<script>
+// ══════════════════════════════════════════════════
+// SECURITY: Token-based access control
+// Share URL as: index.html#t=DERECH2026
+// Change SECRET_TOKEN to whatever you want
+// ══════════════════════════════════════════════════
+const SECRET_TOKEN = "DERECH2026";   // ← שני כאן את הקוד הסודי
+
+function getHashParam(key) {
+  var hash = window.location.hash.slice(1);
+  var parts = hash.split("&");
+  for (var i = 0; i < parts.length; i++) {
+    var kv = parts[i].split("=");
+    if (kv[0] === key) return decodeURIComponent(kv[1] || "");
+  }
+  return "";
+}
+
+// ── Check token ──────────────────────────────────
+var token = getHashParam("t");
+// Allow access when: correct token OR running locally (file://) OR already authed this session
+var isLocal = window.location.protocol === "file:";
+var authorized = isLocal || (token === SECRET_TOKEN) || (sessionStorage.getItem("derech_auth") === SECRET_TOKEN);
+
+if (!authorized) {
+  // Hide everything, show nothing
+  document.body.innerHTML = "";
+  document.documentElement.style.background = "#fff";
+} else {
+  // Save auth for this session
+  sessionStorage.setItem("derech_auth", SECRET_TOKEN);
+
+  // ── Name gate ────────────────────────────────────
+  var savedName = sessionStorage.getItem("derech_name") || "";
+  if (!savedName) {
+    showNameGate();
+  } else {
+    applyName(savedName);
+    loadProgress(savedName);
+  }
+}
+
+function showNameGate() {
+  var gate = document.createElement("div");
+  gate.id = "name-gate";
+  gate.style.cssText = [
+    "position:fixed","inset:0","z-index:9999",
+    "background:#1A1A1A",
+    "display:flex","flex-direction:column",
+    "align-items:center","justify-content:center",
+    "padding:30px 20px","text-align:center","gap:14px"
+  ].join(";");
+  gate.innerHTML = [
+    "<div style='font-size:56px'>🛒</div>",
+    "<div style='font-size:26px;font-weight:900;color:#FFD600;font-family:Heebo,sans-serif'>הדרך לעצמאות</div>",
+    "<div style='font-size:15px;color:#888;line-height:1.5'>כישורי חיים · ריפוי בעיסוק · לי-את רטנר<br>מה השם שלך?</div>",
+    "<input id='gate-name' type='text' maxlength='20' placeholder='הכנס שם...'",
+    "  style='width:280px;padding:16px;border-radius:14px;border:2.5px solid #333;",
+    "  background:#222;color:#fff;font-size:22px;font-family:inherit;text-align:center;",
+    "  outline:none;direction:rtl;transition:border-color 0.2s'",
+    "  onkeydown='if(event.key==String.fromCharCode(13))submitName()'>",
+    "<button onclick='submitName()' style='width:280px;padding:16px;border-radius:14px;border:none;",
+    "  background:#FFD600;color:#1A1A1A;font-size:20px;font-weight:900;cursor:pointer;",
+    "  font-family:inherit;box-shadow:0 4px 0 #F9A825'>",
+    "  בוא נשחק! 🎮</button>",
+    "<div id='gate-err' style='color:#ff6b6b;font-size:14px;min-height:18px;font-weight:700'></div>"
+  ].join("");
+  document.body.appendChild(gate);
+  setTimeout(function(){ document.getElementById("gate-name").focus(); }, 200);
+}
+
+function submitName() {
+  var name = (document.getElementById("gate-name").value || "").trim();
+  if (!name) {
+    document.getElementById("gate-err").textContent = "הכנס שם!";
+    return;
+  }
+  sessionStorage.setItem("derech_name", name);
+  document.getElementById("name-gate").remove();
+  applyName(name);
+  loadProgress(name);
+}
+
+function applyName(name) {
+  // Show name in banner
+  var chip = document.getElementById("user-chip");
+  if (chip) chip.style.display = "flex";
+  var nd = document.getElementById("user-name");
+  if (nd) nd.textContent = name;
+  // Welcome in hero
+  var hw = document.getElementById("hero-welcome");
+  if (hw) { hw.textContent = "👋 שלום, " + name + "!"; hw.style.display = "inline-block"; }
+  // Progress
+  loadProgress(name);
+  // Patch all game links to pass name as URL param
+  document.querySelectorAll("a.game-link, a.mini-card").forEach(function(a) {
+    var href = a.getAttribute("href");
+    if (!href || href.startsWith("#")) return;
+    // add player param, preserve hash
+    var hashIdx = href.indexOf("#");
+    var base = hashIdx >= 0 ? href.slice(0, hashIdx) : href;
+    var frag  = hashIdx >= 0 ? href.slice(hashIdx) : "";
+    var sep = base.indexOf("?") >= 0 ? "&" : "?";
+    a.setAttribute("href", base + sep + "player=" + encodeURIComponent(name) + frag);
+  });
+}
+
+// ── Progress (per-name) ───────────────────────────
+function loadProgress(name) {
+  try {
+    var s = JSON.parse(localStorage.getItem("derech_" + name) || "{}");
+    document.querySelectorAll(".tcell").forEach(function(c, i) {
+      if (s[i]) c.classList.add("done");
+    });
+  } catch(e) {}
+}
+
+function toggleDone(el) {
+  el.classList.toggle("done");
+  var name = sessionStorage.getItem("derech_name");
+  if (!name) return;
+  try {
+    var s = {};
+    document.querySelectorAll(".tcell").forEach(function(c, i) { s[i] = c.classList.contains("done"); });
+    localStorage.setItem("derech_" + name, JSON.stringify(s));
+  } catch(e) {}
+}
+
+function logout() {
+  if (confirm("להחליף שחקן?")) {
+    sessionStorage.removeItem("derech_name");
+    location.reload();
+  }
+}
+</script>
+<script>
+(function(){
+// ── LEMON GAME ENGINE ─────────────────────────────────────────
+const LEMON_SVG = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><radialGradient id="lg" cx="35%" cy="30%" r="65%"><stop offset="0%" stop-color="#FFF176"/><stop offset="40%" stop-color="#FFD600"/><stop offset="100%" stop-color="#F9A825"/></radialGradient><radialGradient id="sh" cx="30%" cy="25%" r="40%"><stop offset="0%" stop-color="rgba(255,255,255,0.6)"/><stop offset="100%" stop-color="rgba(255,255,255,0)"/></radialGradient></defs><ellipse cx="50" cy="54" rx="36" ry="30" fill="url(#lg)" stroke="#F9A825" stroke-width="1.5"/><ellipse cx="16" cy="54" rx="7" ry="5" fill="#FFD600" stroke="#F9A825" stroke-width="1"/><ellipse cx="84" cy="54" rx="7" ry="5" fill="#FFD600" stroke="#F9A825" stroke-width="1"/><ellipse cx="50" cy="54" rx="36" ry="30" fill="url(#sh)"/><path d="M55 28 Q68 12 72 18 Q62 26 55 32 Z" fill="#66BB6A" stroke="#43A047" stroke-width="1"/><line x1="55" y1="28" x2="53" y2="22" stroke="#795548" stroke-width="2" stroke-linecap="round"/><path d="M35 45 Q50 40 65 45" fill="none" stroke="rgba(249,168,37,0.4)" stroke-width="1"/><path d="M32 54 Q50 50 68 54" fill="none" stroke="rgba(249,168,37,0.4)" stroke-width="1"/><path d="M35 63 Q50 68 65 63" fill="none" stroke="rgba(249,168,37,0.4)" stroke-width="1"/></svg>';
+const LEMON_URI = 'data:image/svg+xml;base64,' + btoa(unescape(encodeURIComponent(LEMON_SVG)));
+
+const LEVELS = [
+  {level:1, label:'מתחיל',   size:90, speed:1.0, goal:30,  color:'#4CAF50'},
+  {level:2, label:'אמצעי',   size:55, speed:1.5, goal:60,  color:'#FF9800'},
+  {level:3, label:'מומחה',   size:27, speed:2.0, goal:100, color:'#f44336'},
+];
+const TOTAL = 100;
+const EARN = 5;
+const MAX_L = 8;
+
+let LN = {
+  money:0, levelIdx:0, active:false,
+  lemons:[], spawnTimer:null, idCounter:0,
+  combo:0, lastHit:0,
+};
+
+function lnId(){ return ++LN.idCounter; }
+function lnRand(a,b){ return a + Math.random()*(b-a); }
+
+// ── OPEN / CLOSE ─────────────────────────────────────────────
+window.openLemonGame = function(){
+  const name = sessionStorage.getItem('derech_name');
+  if(name){
+    // Load saved wallet
+    try{
+      const d = JSON.parse(localStorage.getItem('lemon_'+name)||'{}');
+      LN.money = d.money||0;
+      LN.levelIdx = d.levelIdx||0;
+      // Cap to max level
+      if(LN.levelIdx >= LEVELS.length) LN.levelIdx = LEVELS.length-1;
+    }catch(e){}
+  }
+  document.getElementById('lemon-overlay').classList.add('active');
+  LN.active = true;
+  lnBuildArena();
+  lnBuildLevelBadges();
+  lnUpdateHUD();
+  if(LN.money >= TOTAL){
+    lnShowWin();
+  } else {
+    lnStartSpawning();
+  }
+};
+
+window.closeLemonGame = function(){
+  lnStop();
+  document.getElementById('lemon-overlay').classList.remove('active');
+  LN.active = false;
+  lnSave();
+  lnUpdateEntryCard();
+};
+
+function lnSave(){
+  const name = sessionStorage.getItem('derech_name');
+  if(!name) return;
+  try{
+    localStorage.setItem('lemon_'+name, JSON.stringify({money:LN.money, levelIdx:LN.levelIdx}));
+  }catch(e){}
+}
+
+function lnUpdateEntryCard(){
+  var el = document.getElementById('lemon-wallet-display');
+  if(el) el.textContent = LN.money;
+}
+
+// ── ARENA STARS ─────────────────────────────────────────────
+function lnBuildArena(){
+  var arena = document.getElementById('ln-arena');
+  // Clear old lemons/overlays
+  arena.querySelectorAll('.ln-lemon,.ln-overlay,.ln-star,.ln-pop').forEach(function(e){e.remove();});
+  // Add stars
+  for(var i=0;i<25;i++){
+    var s=document.createElement('div');
+    s.className='ln-star';
+    var sz=1+(i%3);
+    s.style.cssText='width:'+sz+'px;height:'+sz+'px;left:'+(i*37%97)+'%;top:'+(i*53%89)+'%;animation-delay:'+(i*0.2)+'s;opacity:'+(0.05+i%5*0.03);
+    arena.appendChild(s);
+  }
+}
+
+// ── LEVEL BADGES ─────────────────────────────────────────────
+function lnBuildLevelBadges(){
+  var wrap = document.getElementById('ln-levels');
+  wrap.innerHTML = '';
+  LEVELS.forEach(function(l,i){
+    var done = i < LN.levelIdx;
+    var active = i === LN.levelIdx;
+    var el = document.createElement('div');
+    el.className = 'ln-lvl';
+    el.textContent = (done?'✓ ':'')+l.label;
+    el.style.cssText = [
+      'background:'+(done?l.color:active?l.color+'33':'rgba(255,255,255,0.06)'),
+      'color:'+(done?'#fff':active?l.color:'#444'),
+      'border-color:'+(active?l.color:'transparent'),
+      'box-shadow:'+(active?'0 0 12px '+l.color+'55':'none'),
+    ].join(';');
+    wrap.appendChild(el);
+  });
+}
+
+function lnUpdateHUD(){
+  var cfg = LEVELS[LN.levelIdx];
+  document.getElementById('ln-money').textContent = LN.money;
+  document.getElementById('ln-level-label').textContent = 'רמה '+cfg.level+' · '+cfg.label;
+  document.getElementById('ln-footer-level').textContent = 'רמה '+cfg.level;
+  document.getElementById('ln-footer-goal').textContent = 'יעד: '+cfg.goal+' ₪';
+  var pct = Math.min(100, LN.money/TOTAL*100);
+  document.getElementById('ln-bar').style.width = pct+'%';
+  document.getElementById('ln-bar').style.backgroundPosition = (100-pct)+'% 0';
+  lnUpdateEntryCard();
+}
+
+// ── SPAWN ─────────────────────────────────────────────────────
+function lnStartSpawning(){
+  lnStop();
+  lnSpawnOne();
+  var interval = 1200 / LEVELS[LN.levelIdx].speed;
+  LN.spawnTimer = setInterval(lnSpawnOne, interval);
+}
+
+function lnStop(){
+  if(LN.spawnTimer){ clearInterval(LN.spawnTimer); LN.spawnTimer=null; }
+  LN.lemons.forEach(function(l){ if(l.raf) cancelAnimationFrame(l.raf); });
+  LN.lemons = [];
+}
+
+function lnSpawnOne(){
+  if(!LN.active) return;
+  if(LN.lemons.length >= MAX_L) return;
+  var arena = document.getElementById('ln-arena');
+  if(!arena) return;
+  var W=arena.offsetWidth, H=arena.offsetHeight;
+  var cfg = LEVELS[LN.levelIdx];
+  var sz = cfg.size;
+
+  var sX,sY,eX,eY,arc;
+  var edge = Math.random();
+  if(edge < 0.6){
+    sX=lnRand(sz,W-sz); sY=H+sz; eX=lnRand(sz,W-sz); eY=-sz; arc=lnRand(30,80);
+  } else if(edge < 0.8){
+    sX=-sz; sY=lnRand(H*0.2,H*0.8); eX=W+sz; eY=lnRand(-sz,H*0.4); arc=lnRand(20,60);
+  } else {
+    sX=W+sz; sY=lnRand(H*0.2,H*0.8); eX=-sz; eY=lnRand(-sz,H*0.4); arc=lnRand(20,60);
+  }
+
+  var baseDur = 3500/cfg.speed;
+  var dur = lnRand(baseDur*0.8, baseDur*1.2);
+  var rot = lnRand(-30,30);
+  var id = lnId();
+
+  // Create DOM element
+  var hitbox = Math.max(sz, 56);
+  var el = document.createElement('div');
+  el.className = 'ln-lemon';
+  el.id = 'lm'+id;
+  el.style.cssText = 'width:'+hitbox+'px;height:'+hitbox+'px;left:'+sX+'px;top:'+sY+'px;';
+  var img = document.createElement('img');
+  img.src = LEMON_URI;
+  img.alt = 'לימון';
+  img.draggable = false;
+  img.style.cssText = 'width:'+sz+'px;height:'+sz+'px;transform:rotate('+rot+'deg)';
+  el.appendChild(img);
+
+  var lemon = {id:id, el:el, sX:sX, sY:sY, eX:eX, eY:eY, arc:arc, dur:dur, start:null, sliced:false, raf:null};
+  LN.lemons.push(lemon);
+  arena.appendChild(el);
+
+  // Click/touch
+  function doSlice(e){
+    e.stopPropagation();
+    if(lemon.sliced) return;
+    lemon.sliced = true;
+    if(lemon.raf) cancelAnimationFrame(lemon.raf);
+    img.classList.add('sliced');
+    lnScore(el, sX, sY);
+    setTimeout(function(){ lnRemoveLemon(id); }, 350);
+  }
+  el.addEventListener('click', doSlice);
+  el.addEventListener('touchend', function(e){ e.preventDefault(); doSlice(e); }, {passive:false});
+
+  // Animate
+  var startTs = null;
+  function animate(ts){
+    if(!startTs) startTs = ts;
+    var t = Math.min((ts-startTs)/dur, 1);
+    var arcY = Math.sin(t*Math.PI)*lemon.arc;
+    var x = sX + (eX-sX)*t;
+    var y = sY + (eY-sY)*t - arcY;
+    el.style.left = (x - hitbox/2)+'px';
+    el.style.top  = (y - hitbox/2)+'px';
+    if(t < 1){
+      lemon.raf = requestAnimationFrame(animate);
+    } else {
+      lnRemoveLemon(id);
+    }
+  }
+  lemon.raf = requestAnimationFrame(animate);
+}
+
+function lnRemoveLemon(id){
+  LN.lemons = LN.lemons.filter(function(l){ return l.id !== id; });
+  var el = document.getElementById('lm'+id);
+  if(el) el.remove();
+}
+
+// ── SCORE ─────────────────────────────────────────────────────
+function lnScore(el, x, y){
+  var now = Date.now();
+  var newCombo = (now - LN.lastHit < 1500) ? LN.combo+1 : 1;
+  LN.combo = newCombo;
+  LN.lastHit = now;
+  var bonus = (newCombo >= 3) ? EARN*2 : EARN;
+
+  LN.money += bonus;
+  if(LN.money > TOTAL) LN.money = TOTAL;
+
+  // Float text
+  var arena = document.getElementById('ln-arena');
+  if(arena){
+    var pop = document.createElement('div');
+    pop.className = 'ln-pop';
+    pop.textContent = '+'+bonus+' ₪'+(newCombo>=3?' 🔥':'');
+    pop.style.cssText='left:'+(x-20)+'px;top:'+(y-20)+'px;color:#FFD600;font-size:'+(newCombo>=3?22:18)+'px;';
+    arena.appendChild(pop);
+    setTimeout(function(){ pop.remove(); }, 700);
+  }
+
+  // Combo display
+  var comboEl = document.getElementById('ln-combo');
+  if(comboEl){
+    if(newCombo>=2){
+      comboEl.textContent = newCombo>=3 ? '🔥 קומבו x'+newCombo+'! +'+EARN*2+' ₪' : '⚡ x'+newCombo;
+      comboEl.style.color = newCombo>=3 ? '#FF6B6B' : '#FFD600';
+    } else {
+      comboEl.textContent = '';
+    }
+  }
+
+  lnUpdateHUD();
+  lnBuildLevelBadges();
+  lnCheckProgress();
+}
+
+function lnCheckProgress(){
+  var cfg = LEVELS[LN.levelIdx];
+  if(LN.money >= TOTAL){
+    lnStop();
+    setTimeout(lnShowWin, 500);
+  } else if(LN.money >= cfg.goal && LN.levelIdx < LEVELS.length-1){
+    lnStop();
+    setTimeout(function(){ lnShowLevelUp(); }, 500);
+  }
+}
+
+// ── OVERLAYS ─────────────────────────────────────────────────
+function lnShowLevelUp(){
+  lnRemoveOverlays();
+  var arena = document.getElementById('ln-arena');
+  var next = LEVELS[LN.levelIdx+1];
+  var ov = document.createElement('div');
+  ov.className = 'ln-overlay';
+  ov.innerHTML = [
+    '<div class="ln-ov-icon">⭐</div>',
+    '<div class="ln-ov-title">עלית רמה!</div>',
+    '<div class="ln-ov-sub">רמה '+(LN.levelIdx+2)+' — '+next.label+'<br><span style="font-size:14px;color:#FF9800">הלימונים קטנים יותר ומהירים יותר!</span></div>',
+    '<div class="ln-ov-money">'+LN.money+' ₪</div>',
+    '<button class="ln-ov-btn" id="ln-next-btn" style="background:'+next.color+'">המשך לרמה '+(LN.levelIdx+2)+' ▶</button>',
+  ].join('');
+  arena.appendChild(ov);
+  document.getElementById('ln-next-btn').addEventListener('click', function(){
+    LN.levelIdx++;
+    lnRemoveOverlays();
+    lnBuildLevelBadges();
+    lnUpdateHUD();
+    lnStartSpawning();
+  });
+}
+
+function lnShowWin(){
+  lnRemoveOverlays();
+  lnSave();
+  // Update landing page tracker
+  try{
+    var name = sessionStorage.getItem('derech_name');
+    if(name){
+      var s = JSON.parse(localStorage.getItem('derech_'+name)||'{}');
+      s[0] = true; // mark "מיחזור" as done
+      localStorage.setItem('derech_'+name, JSON.stringify(s));
+      document.querySelectorAll('.tcell').forEach(function(c,i){ if(s[i]) c.classList.add('done'); });
+    }
+  }catch(e){}
+
+  var arena = document.getElementById('ln-arena');
+  var ov = document.createElement('div');
+  ov.className = 'ln-overlay';
+  ov.style.background = 'linear-gradient(160deg,rgba(13,27,42,0.95),rgba(26,39,68,0.95))';
+  ov.innerHTML = [
+    '<div class="ln-ov-icon">🏆</div>',
+    '<div class="ln-ov-title">כל הכבוד! 🌟</div>',
+    '<div class="ln-ov-money">'+LN.money+' ₪</div>',
+    '<div class="ln-ov-sub">אתה נינג\'ת לימון אמיתי!<br>הכסף נשמר בארנק שלך!</div>',
+    '<button class="ln-ov-btn" id="ln-done-btn" style="background:linear-gradient(135deg,#FFD600,#FF9800);color:#1a1a1a">🍋 חזור לתפריט</button>',
+    '<button class="ln-ov-btn2" id="ln-replay-btn">↺ שחק שוב</button>',
+  ].join('');
+  arena.appendChild(ov);
+
+  document.getElementById('ln-done-btn').addEventListener('click', function(){
+    closeLemonGame();
+  });
+  document.getElementById('ln-replay-btn').addEventListener('click', function(){
+    LN.money=0; LN.levelIdx=0; LN.combo=0;
+    lnRemoveOverlays();
+    lnBuildArena();
+    lnBuildLevelBadges();
+    lnUpdateHUD();
+    lnStartSpawning();
+  });
+}
+
+function lnRemoveOverlays(){
+  document.querySelectorAll('.ln-overlay').forEach(function(e){e.remove();});
+  document.querySelectorAll('.ln-lemon').forEach(function(e){e.remove();});
+}
+
+// ── INIT on page load ────────────────────────────────────────
+lnUpdateEntryCard();
+
+})(); // end IIFE
+</script>
+</body>
+</html>
