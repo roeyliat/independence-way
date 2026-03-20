@@ -51,10 +51,10 @@
     max-width:1100px;
     margin:0 auto;
     min-height:100vh;
-    padding:16px 16px 76px;
+    padding:10px 16px 76px;
     display:flex;
     flex-direction:column;
-    gap:14px;
+    gap:8px;
   }
 
   .topbar{
@@ -62,7 +62,7 @@
     border:2px solid rgba(245,197,24,.28);
     box-shadow:var(--shadow);
     border-radius:24px;
-    padding:14px 16px;
+    padding:8px 16px;
   }
 
   .head{
@@ -147,7 +147,7 @@
     background:rgba(255,255,255,.88);
     border-radius:22px;
     box-shadow:var(--shadow);
-    padding:14px 12px;
+    padding:8px 10px;
     text-align:center;
     border:2px solid rgba(255,255,255,.65);
   }
@@ -166,7 +166,7 @@
     background:rgba(255,255,255,.88);
     border:2px dashed rgba(212,160,23,.42);
     border-radius:22px;
-    padding:14px 16px;
+    padding:8px 14px;
     text-align:center;
     box-shadow:var(--shadow);
   }
@@ -182,12 +182,12 @@
   }
 
   .feedback{
-    min-height:56px;
+    min-height:40px;
     display:flex;
     align-items:center;
     justify-content:center;
     text-align:center;
-    padding:12px 14px;
+    padding:8px 14px;
     background:#fffef9;
     border:2px solid #efe8cf;
     border-radius:18px;
@@ -203,7 +203,7 @@
   .game-shell{
     position:relative;
     flex:1;
-    min-height:420px;
+    min-height:320px;
     background:linear-gradient(180deg,#dff4ff 0%, #efffff 45%, #eef9e7 46%, #d7f0c6 100%);
     border-radius:28px;
     box-shadow:var(--shadow);
@@ -331,23 +331,23 @@
 <div class="bg-lemon s l5">🍋</div>
 
 <div class="wrap">
+  <div class="toolbar">
+    <button class="btn btn-primary" id="startBtn" type="button">▶ התחילי רמה</button>
+    <button class="btn btn-ghost" id="retryBtn" type="button">↺ נסי שוב</button>
+    <button class="btn btn-ghost" id="homeBtn" type="button">🏡 חזרה לשכונה</button>
+    <button class="btn btn-secondary" id="speakBtn" type="button">🔊 הקרא שוב</button>
+  </div>
+
   <div class="topbar">
     <div class="head">
       <div class="title-badge">🍋 לימון נינג'ה</div>
-      <button class="btn btn-secondary" id="speakBtn" type="button">🔊 הקרא שוב</button>
     </div>
-    <div class="subtitle">לוחצים על הלימונים, צוברים כסף, וממשיכים שלב־שלב. אם לא הצלחת — מנסים שוב באותה רמה.</div>
     <div class="progress">
       <div class="step">🍋 רצף לימונדה</div>
       <div class="step active">🍋 לימון נינג'ה</div>
       <div class="step">💰 כסף</div>
       <div class="step">🛒 קנייה</div>
       <div class="step">🧾 קופה</div>
-    </div>
-    <div class="toolbar">
-      <button class="btn btn-primary" id="startBtn" type="button">▶ התחילי רמה</button>
-      <button class="btn btn-ghost" id="retryBtn" type="button">↺ נסי שוב</button>
-      <button class="btn btn-ghost" id="homeBtn" type="button">🏡 חזרה לשכונה</button>
     </div>
   </div>
 
