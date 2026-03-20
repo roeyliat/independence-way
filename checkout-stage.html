@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>קופה ועודף</title>
+<link href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;700;900&display=swap" rel="stylesheet">
+<style>
+body{margin:0;font-family:Heebo,sans-serif;background:linear-gradient(180deg,#eef7ff,#fff8ef);color:#2f2a24}
+.wrap{max-width:980px;margin:0 auto;padding:16px}
+.top{background:#fff;border-radius:24px;padding:16px;box-shadow:0 10px 24px rgba(0,0,0,.08);display:flex;justify-content:space-between;gap:10px;align-items:center;flex-wrap:wrap}
+h1{margin:0;font-size:32px}.sub{color:#6b6258;font-weight:700}
+.layout{display:grid;grid-template-columns:1.1fr .9fr;gap:16px;margin-top:16px}
+.panel{background:#fff;border-radius:24px;padding:16px;box-shadow:0 10px 24px rgba(0,0,0,.08)}
+.money-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(110px,1fr));gap:12px}
+.money{border:3px solid #e8dcc7;border-radius:18px;padding:8px;background:#fffdf9;cursor:pointer;text-align:center}
+.money img{width:100%;height:72px;object-fit:contain;display:block}
+.money .lbl{font-weight:900;margin-top:4px}
+.target{font-size:40px;font-weight:900;color:#1b8b43}
+.row{display:flex;justify-content:space-between;align-items:center;margin:8px 0}
+.cart{min-height:100px;border:3px dashed #c8d6e5;border-radius:18px;padding:12px;background:#f8fbff}
+.cart-items{display:flex;gap:8px;flex-wrap:wrap}
+.cart-chip{background:#fff;border:2px solid #e8dcc7;border-radius:12px;padding:6px 10px;font-weight:800}
+.feedback{min-height:54px;font-size:22px;font-weight:900;text-align:center;margin-top:10px}
+.controls{display:flex;gap:10px;flex-wrap:wrap;justify-content:center;margin-top:12px}
+button{border:none;border-radius:16px;padding:12px 16px;font:inherit;font-weight:900;cursor:pointer}
+.primary{background:#43a047;color:#fff}.secondary{background:#fff;border:2px solid #d9c59a}
+.footer{margin-top:18px;text-align:center;font-size:12px;color:#726657}
+@media(max-width:900px){.layout{grid-template-columns:1fr}}
+</style></head><body>
+<div class="wrap">
+<div class="top"><div><h1>🧾 קופה ועודף</h1><div class="sub">תרגול תפקודי: בחירת כסף מתאים, תשלום, בדיקה וסיום</div></div><button class="secondary" onclick="speakInstruction(currentInstruction)">🔊 הקרא שוב</button></div>
+<div class="layout">
+  <div class="panel">
+    <div class="row"><strong>בחר כסף מתאים</strong><span>ארנק: ₪<span id="walletTxt">0</span></span></div>
+    <div class="money-grid" id="moneyGrid"></div>
+  </div>
+  <div class="panel">
+    <div class="row"><span>צריך לשלם</span><span class="target" id="targetTxt">₪0</span></div>
+    <div class="row"><span>שמתי לתשלום</span><strong id="paidTxt">₪0</strong></div>
+    <div class="cart"><div class="cart-items" id="cartItems"></div></div>
+    <div class="feedback" id="feedback"></div>
+    <div class="controls">
+      <button class="secondary" onclick="resetPayment()">נקה ובדוק שוב</button>
+      <button class="primary" onclick="finishPayment()">סיום תשלום</button>
+      <button class="secondary" onclick="location.href='index.html'">חזרה לשכונה</button>
+    </div>
+  </div>
+</div>
+<div class="footer">כל הזכויות שמורות ללי-את רטנר 2026 ©</div>
+</div>
+<script src="wallet.js"></script><script src="student-progress.js"></script><script src="accessibility-audio.js"></script>
+<script>
+const money = [
+  {value:0.5,label:'חצי שקל',img:'https://commons.wikimedia.org/wiki/Special:FilePath/0.5%20new%20shekel.jpg'},
+  {value:1,label:'1 ₪',img:'https://commons.wikimedia.org/wiki/Special:FilePath/Israel%201%20New%20Sheqel%201985%20Edge%2C%20Obverse%20%26%20Reverse.jpg'},
+  {value:2,label:'2 ₪',img:'https://commons.wikimedia.org/wiki/Special:FilePath/Israeli%202%20New-Shekel%20coins.jpg'},
+  {value:5,label:'5 ₪',img:'https://commons.wikimedia.org/wiki/Special:FilePath/A%205%20New%20Israeli%20Shekels%20Coin.png'},
+  {value:10,label:'10 ₪',img:'https://commons.wikimedia.org/wiki/Special:FilePath/10%20Israeli%20New%20Shekels%20Coin%20%2810%20NIS%29.JPG'},
+  {value:20,label:'20 ₪',img:'https://commons.wikimedia.org/wiki/Special:FilePath/20%20Israeli%20new%20shekel%20in%202017%20Obverse.jpg'},
+  {value:50,label:'50 ₪',img:'https://commons.wikimedia.org/wiki/Special:FilePath/50%20Israeli%20new%20shekel%20in%202013%20Obverse.jpg'},
+  {value:100,label:'100 ₪',img:'https://commons.wikimedia.org/wiki/Special:FilePath/100%20Israeli%20new%20shekel%20in%202017%20Obverse.jpg'},
+  {value:200,label:'200 ₪',img:'https://commons.wikimedia.org/wiki/Special:FilePath/200%20Israeli%20new%20shekel%20in%202015%20Obverse.jpg'}
+];
+let target=0, paid=0, selected=[], currentInstruction='בחר כסף מתאים לתשלום';
+function chooseTarget(){ const options=[7,10,12,15,18,20,25,30]; target=options[Math.floor(Math.random()*options.length)]; targetTxt.textContent='₪'+target; }
+function renderWallet(){ walletTxt.textContent=AppState.wallet().toFixed(0); const grid=moneyGrid; grid.innerHTML=''; money.forEach(m=>{ const b=document.createElement('button'); b.className='money'; b.type='button'; b.innerHTML='<img src="'+m.img+'" alt="'+m.label+'"><div class="lbl">'+m.label+'</div>'; b.onclick=()=>addMoney(m); grid.appendChild(b); });}
+function addMoney(m){ selected.push(m); paid = +(paid + m.value).toFixed(2); renderCart(); if(paid<target) { feedback.textContent='אפשר להוסיף עוד כסף'; speakInstruction('אפשר להוסיף עוד כסף'); } else if(paid===target) { feedback.textContent='יופי, בחרת כסף מתאים'; speakInstruction('יופי, בחרת כסף מתאים'); } else { feedback.textContent='יש כאן יותר כסף. בוא נבדוק שוב'; speakInstruction('יש כאן יותר כסף. בוא נבדוק שוב'); } }
+function renderCart(){ paidTxt.textContent='₪'+paid; cartItems.innerHTML=''; selected.forEach((m,i)=>{ const c=document.createElement('div'); c.className='cart-chip'; c.textContent=m.label; cartItems.appendChild(c); }); }
+function resetPayment(){ selected=[]; paid=0; renderCart(); feedback.textContent='ניקינו. בוחרים שוב כסף מתאים'; speakInstruction('ניקינו. בוחרים שוב כסף מתאים'); }
+function finishPayment(){
+  if(paid<target){ feedback.textContent='צריך להוסיף עוד כסף'; speakInstruction('צריך להוסיף עוד כסף'); return; }
+  if(AppState.wallet()<paid){ feedback.textContent='אין מספיק כסף בארנק. בוא נבחר שוב'; speakInstruction('אין מספיק כסף בארנק. בוא נבחר שוב'); return; }
+  AppState.spendMoney(paid);
+  const change = +(paid-target).toFixed(2);
+  walletTxt.textContent=AppState.wallet().toFixed(0);
+  Progress.mark('checkout', 20, 'index.html');
+  if(change>0){ feedback.textContent='סיימת את הקנייה. העודף שלך הוא ₪'+change; speakInstruction('סיימת את הקנייה. יש עודף.'); }
+  else { feedback.textContent='סיימת את הקנייה. תשלום מתאים!'; speakInstruction('סיימת את הקנייה. תשלום מתאים.'); }
+  setTimeout(()=>location.href='index.html',1800);
+}
+renderWallet(); chooseTarget(); renderCart(); speakInstruction(currentInstruction);
+</script></body></html>

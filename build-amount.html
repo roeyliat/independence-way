@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>בונים סכום</title>
+  <style>
+    :root{
+      --bg:#fff8ec;
+      --card:#ffffff;
+      --gold:#d18f00;
+      --gold-soft:#fff5d9;
+      --green:#2e7d32;
+      --green-soft:#e8f5e9;
+      --blue:#3367d6;
+      --muted:#6c6f6d;
+      --danger:#c62828;
+      --shadow:0 10px 24px rgba(0,0,0,.08);
+      --radius:18px;
+    }
+    *{box-sizing:border-box}
+    body{margin:0;font-family:Heebo, Arial, sans-serif;background:linear-gradient(180deg,#fffdf7,#fff3db)}
+    .wrap{max-width:860px;margin:0 auto;min-height:100vh;padding-bottom:26px}
+    .topbar{background:#fff;position:sticky;top:0;z-index:20;box-shadow:0 2px 12px rgba(0,0,0,.06)}
+    .title{padding:14px 16px 8px;text-align:center;font-size:28px;font-weight:900;color:var(--gold)}
+    .progress{display:flex;gap:8px;justify-content:space-between;padding:0 10px 12px;overflow:auto}
+    .step{flex:1;min-width:92px;background:#faf8f1;border-radius:999px;padding:8px 10px;text-align:center;font-size:13px;color:#8a846f;font-weight:700;border:2px solid transparent}
+    .step.active{background:#fff3d5;color:#9a6400;border-color:#ffca68}
+    .content{padding:16px}
+    .hero{background:#fff;border-radius:24px;padding:18px;box-shadow:var(--shadow);margin-bottom:16px;text-align:center}
+    .hero h1{margin:0 0 6px;font-size:24px;color:#734c00}
+    .hero p{margin:0;color:#7b735c;font-size:15px;line-height:1.5}
+    .toolbar{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-top:14px}
+    .btn{border:none;border-radius:14px;padding:12px 16px;font-family:inherit;font-weight:900;cursor:pointer}
+    .btn.speak{background:#edf4ff;color:#1a56db;border:2px solid #bcd2ff}
+    .btn.next{background:#43a047;color:#fff;box-shadow:0 5px 0 #2e7d32}
+    .btn.next:active{transform:translateY(3px);box-shadow:0 2px 0 #2e7d32}
+    .btn.check{background:#d18f00;color:#fff;box-shadow:0 5px 0 #a86f00}
+    .btn.check:active{transform:translateY(3px);box-shadow:0 2px 0 #a86f00}
+    .btn.clear{background:#fff;color:#734c00;border:2px solid #f2d592}
+    .mission{background:var(--gold-soft);border:2px dashed #f4c74d;border-radius:18px;padding:14px 16px;margin:16px 0;text-align:center}
+    .mission .label{font-size:13px;color:#9a6d00;font-weight:700}
+    .mission .task{font-size:34px;font-weight:900;color:#7a5200;margin-top:4px}
+    .mission .self{margin-top:8px;color:#805d11;font-size:14px;font-weight:700}
+    .sum-box{display:grid;grid-template-columns:1fr auto;gap:12px;align-items:center;background:#fff;border-radius:18px;padding:14px 16px;box-shadow:var(--shadow);margin-bottom:14px}
+    .sum-box .current{font-size:30px;font-weight:900;color:#1b5e20}
+    .sum-box .target{font-size:20px;font-weight:900;color:#734c00}
+    .feedback{min-height:54px;border-radius:16px;padding:14px 16px;font-size:18px;font-weight:900;text-align:center;display:flex;align-items:center;justify-content:center;background:#f8faf8;color:#607063;border:2px solid #e2ece3}
+    .feedback.ok{background:#e8f5e9;color:#1b5e20;border-color:#a5d6a7}
+    .feedback.warn{background:#fff3e0;color:#e65100;border-color:#ffcc80}
+    .feedback.err{background:#ffebee;color:#b71c1c;border-color:#ef9a9a}
+    .coin-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;margin-top:16px}
+    .coin-card{background:#fff;border-radius:20px;padding:14px;box-shadow:var(--shadow);border:3px solid transparent;cursor:pointer;transition:.18s transform,.18s border-color}
+    .coin-card:hover{transform:scale(1.02)}
+    .coin-img{width:100%;max-width:180px;aspect-ratio:1/1;object-fit:contain;display:block;margin:0 auto 10px}
+    .coin-name{text-align:center;font-size:18px;font-weight:900;color:#234026}
+    .selected-panel{margin-top:18px;background:#fff;border-radius:18px;padding:14px;box-shadow:var(--shadow)}
+    .selected-title{font-size:16px;font-weight:900;color:#6c5107;margin-bottom:10px}
+    .chips{display:flex;gap:8px;flex-wrap:wrap;min-height:42px}
+    .chip{background:#fff8e1;border:2px solid #f6c860;border-radius:999px;padding:8px 12px;font-weight:900;color:#805900;display:flex;align-items:center;gap:6px}
+    .chip button{border:none;background:transparent;color:#b71c1c;font-weight:900;cursor:pointer;font-size:16px}
+    .hint-card{margin-top:18px;background:#fff;border-radius:18px;padding:14px;box-shadow:var(--shadow)}
+    .hint-card h3{margin:0 0 8px;font-size:18px;color:#2c5e34}
+    .hint-card ul{margin:0;padding-right:18px;color:#45624a;line-height:1.7}
+    @media (max-width:640px){
+      .coin-grid{grid-template-columns:1fr 1fr}
+      .mission .task{font-size:28px}
+      .sum-box{grid-template-columns:1fr}
+    }
+  </style>
+</head>
+<body>
+<div class="wrap">
+  <div class="topbar">
+    <div class="title">🪙 בונים סכום</div>
+    <div class="progress">
+      <div class="step" id="step-1">💰 מזהים כסף</div>
+      <div class="step active" id="step-2">🪙 בונים סכום</div>
+      <div class="step" id="step-3">💲 משווים</div>
+      <div class="step" id="step-4">🛒 קונים</div>
+      <div class="step" id="step-5">🧾 משלמים</div>
+    </div>
+  </div>
+
+  <div class="content">
+    <div class="hero">
+      <h1>בונים את הסכום המתאים</h1>
+      <p>בחר מטבעות כדי להגיע לסכום שביקשו. אפשר להגיע לאותו סכום בכמה דרכים שונות.</p>
+      <div class="toolbar">
+        <button class="btn speak" id="speakBtn">🔊 הקרא שוב</button>
+        <button class="btn next" id="newTaskBtn">משימה חדשה</button>
+        <button class="btn clear" id="clearBtn">נקה בחירה</button>
+        <button class="btn check" id="checkBtn">בדיקה</button>
+      </div>
+    </div>
+
+    <div class="mission">
+      <div class="label">המשימה שלי</div>
+      <div class="task" id="taskText">טוען…</div>
+      <div class="self">בקרה עצמית: הסתכלתי על כל האפשרויות? בדקתי אם הגעתי לסכום המדויק?</div>
+    </div>
+
+    <div class="sum-box">
+      <div>
+        <div class="target" id="targetText">צריך להגיע ל־0 ₪</div>
+        <div class="current" id="currentText">בחרתי: 0 ₪</div>
+      </div>
+      <div style="font-weight:900;color:#6b5d31">אפשר יותר מדרך אחת נכונה ✅</div>
+    </div>
+
+    <div class="feedback" id="feedback">בחר מטבעות ולחץ על בדיקה.</div>
+
+    <div class="coin-grid" id="coinGrid"></div>
+
+    <div class="selected-panel">
+      <div class="selected-title">הכסף שבחרתי</div>
+      <div class="chips" id="chips"></div>
+    </div>
+
+    <div class="hint-card">
+      <h3>למה זה חשוב?</h3>
+      <ul>
+        <li>כך לומדים להרכיב סכום לפני שמגיעים לקופה.</li>
+        <li>כך מבינים שאפשר לשלם בכמה דרכים שונות.</li>
+        <li>כך בודקים אם חסר כסף או אם בחרנו יותר מדי.</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<script>
+const coins = [
+  { value: 0.5, label: 'חצי שקל', img: 'https://commons.wikimedia.org/wiki/Special:FilePath/0.5%20new%20shekel.jpg' },
+  { value: 1, label: '1 שקל', img: 'https://commons.wikimedia.org/wiki/Special:FilePath/Israel%201%20New%20Sheqel%201985%20Edge%2C%20Obverse%20%26%20Reverse.jpg' },
+  { value: 2, label: '2 שקלים', img: 'https://commons.wikimedia.org/wiki/Special:FilePath/Israeli%202%20New-Shekel%20coins.jpg' },
+  { value: 5, label: '5 שקלים', img: 'https://commons.wikimedia.org/wiki/Special:FilePath/A%205%20New%20Israeli%20Shekels%20Coin.png' },
+  { value: 10, label: '10 שקלים', img: 'https://commons.wikimedia.org/wiki/Special:FilePath/10%20Israeli%20New%20Shekels%20Coin%20%2810%20NIS%29.JPG' }
+];
+
+let target = 0;
+let selected = [];
+let currentInstruction = '';
+
+function speak(text){
+  if (!('speechSynthesis' in window)) return;
+  window.speechSynthesis.cancel();
+  const u = new SpeechSynthesisUtterance(text);
+  u.lang = 'he-IL';
+  u.rate = 0.9;
+  u.pitch = 1;
+  window.speechSynthesis.speak(u);
+}
+
+function setFeedback(text, kind=''){
+  const el = document.getElementById('feedback');
+  el.textContent = text;
+  el.className = 'feedback' + (kind ? ' ' + kind : '');
+}
+
+function currentSum(){
+  return Math.round(selected.reduce((a,b) => a + b.value, 0) * 10) / 10;
+}
+
+function formatNis(n){
+  return Number.isInteger(n) ? `${n} ₪` : `${n.toFixed(1)} ₪`;
+}
+
+function renderCoins(){
+  const grid = document.getElementById('coinGrid');
+  grid.innerHTML = '';
+  coins.forEach((coin, index) => {
+    const card = document.createElement('button');
+    card.type = 'button';
+    card.className = 'coin-card';
+    card.innerHTML = `
+      <img class="coin-img" src="${coin.img}" alt="${coin.label}">
+      <div class="coin-name">${coin.label}</div>
+    `;
+    card.addEventListener('click', () => {
+      selected.push({ ...coin, id: `${coin.label}-${Date.now()}-${Math.random()}` });
+      updateSelection();
+      speak(`${coin.label}`);
+    });
+    grid.appendChild(card);
+  });
+}
+
+function updateSelection(){
+  const chips = document.getElementById('chips');
+  chips.innerHTML = '';
+  if (!selected.length){
+    chips.innerHTML = '<div style="color:#8b8b8b;font-style:italic">עדיין לא בחרתי כסף</div>';
+  }
+  selected.forEach(item => {
+    const chip = document.createElement('div');
+    chip.className = 'chip';
+    chip.innerHTML = `${item.label} <button aria-label="הסר ${item.label}">✕</button>`;
+    chip.querySelector('button').addEventListener('click', () => {
+      selected = selected.filter(x => x.id !== item.id);
+      updateSelection();
+    });
+    chips.appendChild(chip);
+  });
+  document.getElementById('currentText').textContent = `בחרתי: ${formatNis(currentSum())}`;
+}
+
+function newTask(){
+  localStorage.setItem('currentStep', '2');
+  const targets = [2,3,4,5,6,7,8,9,10,12,15,17,20];
+  target = targets[Math.floor(Math.random() * targets.length)];
+  selected = [];
+  document.getElementById('taskText').textContent = `בנה ${formatNis(target)}`;
+  document.getElementById('targetText').textContent = `צריך להגיע ל־${formatNis(target)}`;
+  currentInstruction = `בנה ${target} שקלים. חפש את המטבעות המתאימים. בדוק אם הגעת לסכום המדויק.`;
+  updateSelection();
+  setFeedback('אפשר לבחור כמה מטבעות שרוצים ואז לבדוק.', 'warn');
+  speak(currentInstruction);
+}
+
+function clearSelection(){
+  selected = [];
+  updateSelection();
+  setFeedback('ניקיתי את הבחירה. אפשר לנסות שוב בשקט.', 'warn');
+  speak('ניקיתי את הבחירה. אפשר לנסות שוב.');
+}
+
+function check(){
+  const sum = currentSum();
+  if (sum === target){
+    setFeedback(`מעולה! בנית בדיוק ${formatNis(target)}. ככה מתכוננים לקופה.`, 'ok');
+    speak(`מעולה. בנית בדיוק ${target} שקלים. ככה מתכוננים לקופה.`);
+  } else if (sum < target){
+    const diff = Math.round((target - sum) * 10) / 10;
+    setFeedback(`עדיין חסר ${formatNis(diff)}. בדוק מה עוד אפשר להוסיף.`, 'err');
+    speak(`עדיין חסר ${diff} שקלים. בדוק מה עוד אפשר להוסיף.`);
+  } else {
+    const diff = Math.round((sum - target) * 10) / 10;
+    setFeedback(`יש יותר מדי כסף: ${formatNis(diff)} מעל הסכום. בדוק מה להסיר.`, 'err');
+    speak(`יש יותר מדי כסף. הורד ${diff} שקלים ובדוק שוב.`);
+  }
+}
+
+document.getElementById('speakBtn').addEventListener('click', () => speak(currentInstruction));
+document.getElementById('newTaskBtn').addEventListener('click', newTask);
+document.getElementById('clearBtn').addEventListener('click', clearSelection);
+document.getElementById('checkBtn').addEventListener('click', check);
+
+renderCoins();
+newTask();
+</script>
+<div style="position:fixed;bottom:6px;left:0;right:0;text-align:center;font-size:12px;color:#6f6458">כל הזכויות שמורות ללי-את רטנר 2026 ©</div></body>
+</html>

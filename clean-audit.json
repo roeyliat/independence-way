@@ -1,0 +1,20 @@
+{
+  "files": [
+    "accessibility-audio.js",
+    "banknote-recognition.html",
+    "build-amount.html",
+    "checkout-stage.html",
+    "coin-recognition.html",
+    "index.html",
+    "lemon-ninja.html",
+    "lemonade_sequence_game.html",
+    "money-mix-recognition.html",
+    "price-comparison-game.html",
+    "recycling-game.html",
+    "shopping-game-stage2.html",
+    "stage2-find-cheapest.html",
+    "student-progress.js",
+    "wallet.js"
+  ],
+  "broken_local_refs": {}
+}

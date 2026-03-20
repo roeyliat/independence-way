@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>לימון נינג'ה</title>
+<link href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;700;900&display=swap" rel="stylesheet">
+<style>
+body{margin:0;font-family:Heebo,sans-serif;background:linear-gradient(180deg,#fffbe9,#fff1bb);overflow:hidden}
+.wrap{max-width:900px;margin:0 auto;min-height:100vh;position:relative;padding:12px}
+.top{display:flex;justify-content:space-between;align-items:center;gap:10px;background:#ffffffd9;border-radius:18px;padding:12px 14px;position:relative;z-index:3}
+.title{font-weight:900;font-size:26px;color:#5d4a00}.meta{display:flex;gap:8px;flex-wrap:wrap}.pill{background:#fff7d4;border-radius:999px;padding:8px 12px;font-weight:800}
+.help{position:absolute;left:12px;top:12px}
+#game{position:relative;height:calc(100vh - 120px);overflow:hidden}
+.lemon{position:absolute;width:96px;height:96px;border:none;background:none;font-size:64px;cursor:pointer;filter:drop-shadow(0 8px 12px rgba(0,0,0,.18))}
+.centerMsg{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;pointer-events:none;font-size:32px;font-weight:900;color:#7d5a00;text-shadow:0 2px 0 #fff}
+.controls{display:flex;justify-content:center;gap:10px;margin-top:10px;position:relative;z-index:3}
+button{border:none;border-radius:16px;padding:12px 16px;font:inherit;font-weight:900;cursor:pointer}
+.primary{background:#43a047;color:#fff}.secondary{background:#fff;border:2px solid #f2d45a}
+.footer{position:fixed;bottom:6px;left:0;right:0;text-align:center;font-size:12px;color:#6e6440}
+</style></head><body>
+<div class="wrap">
+  <div class="top">
+    <div><div class="title">🍋 לימון נינג'ה</div><div>מוטוריקה, תגובה ועין־יד</div></div>
+    <div class="meta">
+      <div class="pill">רמה: <span id="levelTxt">1</span>/3</div>
+      <div class="pill">זמן: <span id="timeTxt">20</span></div>
+      <div class="pill">פגיעות: <span id="hitsTxt">0</span></div>
+      <div class="pill">ארנק: ₪<span id="walletTxt">0</span></div>
+    </div>
+    <button class="secondary" onclick="speakInstruction(currentInstruction)">🔊</button>
+  </div>
+  <div id="game"><div class="centerMsg" id="msg"></div></div>
+  <div class="controls">
+    <button class="secondary" onclick="location.href='index.html'">חזרה לשכונה</button>
+    <button class="primary" onclick="startLevel()">התחל / נסה שוב</button>
+  </div>
+</div>
+<div class="footer">כל הזכויות שמורות ללי-את רטנר 2026 ©</div>
+<script src="wallet.js"></script><script src="student-progress.js"></script><script src="accessibility-audio.js"></script>
+<script>
+let level=1,hits=0,timeLeft=20,spawnTimer=null,timer=null,currentInstruction='חתוך את הלימונים';
+const cfg={1:{goal:8, speed:1200, time:20, reward:10},2:{goal:12, speed:900, time:20, reward:15},3:{goal:16, speed:700, time:22, reward:20}};
+function ui(){ levelTxt.textContent=level; hitsTxt.textContent=hits; timeTxt.textContent=timeLeft; walletTxt.textContent=AppState.wallet(); }
+function say(msg){ msg && (document.getElementById('msg').textContent=msg); speakInstruction(msg||currentInstruction); }
+function clearGame(){ game.querySelectorAll('.lemon').forEach(x=>x.remove()); clearInterval(spawnTimer); clearInterval(timer); }
+function spawn(){ const b=document.createElement('button'); b.className='lemon'; b.type='button'; b.textContent='🍋'; b.style.left=Math.max(0,Math.random()*(game.clientWidth-96))+'px'; b.style.top=Math.max(0,Math.random()*(game.clientHeight-120))+'px'; b.onclick=()=>{ hits++; b.remove(); ui(); speakSuccess(); }; game.appendChild(b); setTimeout(()=>b.remove(), 1600); }
+function finish(){
+  clearGame();
+  const pass = hits >= cfg[level].goal;
+  if(pass){
+    AppState.addMoney(cfg[level].reward);
+    Progress.mark('lemon-ninja', 10, 'coin-recognition.html');
+    walletTxt.textContent=AppState.wallet();
+    if(level<3){ level++; say('כל הכבוד, עוברים לרמה הבאה'); }
+    else { say('הרווחת כסף. עכשיו אפשר להמשיך לקניות'); setTimeout(()=>location.href='coin-recognition.html', 1800); }
+  } else {
+    say('ננסה שוב באותה רמה');
+  }
+}
+function startLevel(){
+  clearGame(); hits=0; timeLeft=cfg[level].time; currentInstruction='חתוך את הלימונים'; ui(); say('חתוך את הלימונים');
+  spawnTimer=setInterval(spawn, cfg[level].speed); spawn();
+  timer=setInterval(()=>{ timeLeft--; ui(); if(timeLeft<=0) finish(); },1000);
+}
+ui(); say('חתוך את הלימונים');
+</script></body></html>
