@@ -19,43 +19,297 @@
       --shadow:0 10px 24px rgba(0,0,0,.08);
       --radius:18px;
     }
+
     *{box-sizing:border-box}
-    body{margin:0;font-family:Heebo, Arial, sans-serif;background:linear-gradient(180deg,#f4fbf4,#e6f5e8);color:var(--text)}
-    .wrap{max-width:760px;margin:0 auto;min-height:100vh;padding-bottom:24px}
-    .topbar{background:#fff;position:sticky;top:0;z-index:20;box-shadow:0 2px 12px rgba(0,0,0,.06)}
-    .title{padding:14px 16px 8px;text-align:center;font-size:28px;font-weight:900;color:var(--green)}
-    .progress{display:flex;gap:8px;justify-content:space-between;padding:0 10px 12px;overflow:auto}
-    .step{flex:1;min-width:92px;background:#f3f6f3;border-radius:999px;padding:8px 10px;text-align:center;font-size:13px;color:#6b7a6f;font-weight:700;border:2px solid transparent}
-    .step.active{background:#e0f2e5;color:var(--green);border-color:#8bc34a}
+
+    body{
+      margin:0;
+      font-family:Heebo, Arial, sans-serif;
+      background:linear-gradient(180deg,#f4fbf4,#e6f5e8);
+      color:var(--text);
+    }
+
+    .wrap{
+      max-width:760px;
+      margin:0 auto;
+      min-height:100vh;
+      padding-bottom:70px;
+    }
+
+    .topbar{
+      background:#fff;
+      position:sticky;
+      top:0;
+      z-index:20;
+      box-shadow:0 2px 12px rgba(0,0,0,.06);
+    }
+
+    .title{
+      padding:14px 16px 8px;
+      text-align:center;
+      font-size:28px;
+      font-weight:900;
+      color:var(--green);
+    }
+
+    .progress{
+      display:flex;
+      gap:8px;
+      justify-content:space-between;
+      padding:0 10px 12px;
+      overflow:auto;
+    }
+
+    .step{
+      flex:1;
+      min-width:92px;
+      background:#f3f6f3;
+      border-radius:999px;
+      padding:8px 10px;
+      text-align:center;
+      font-size:13px;
+      color:#6b7a6f;
+      font-weight:700;
+      border:2px solid transparent;
+    }
+
+    .step.active{
+      background:#e0f2e5;
+      color:var(--green);
+      border-color:#8bc34a;
+    }
+
     .content{padding:16px}
-    .hero{background:var(--card);border-radius:24px;padding:18px;box-shadow:var(--shadow);margin-bottom:16px;text-align:center}
-    .hero h1{margin:0 0 6px;font-size:24px}
-    .hero p{margin:0;color:var(--muted);font-size:15px;line-height:1.5}
-    .toolbar{display:flex;gap:10px;align-items:center;justify-content:center;margin-top:14px;flex-wrap:wrap}
-    .speak-btn,.ghost-btn,.primary-btn{border:none;border-radius:14px;padding:12px 16px;font-family:inherit;font-weight:900;cursor:pointer}
-    .speak-btn{background:#fff7e6;color:#8a5a00;border:2px solid #ffd180}
-    .ghost-btn{background:#edf4ff;color:#1a56db;border:2px solid #bcd2ff}
-    .primary-btn{background:var(--green-2);color:#fff;box-shadow:0 5px 0 #1f5b22}
-    .primary-btn:active{transform:translateY(3px);box-shadow:0 2px 0 #1f5b22}
-    .mission{background:#e8f5e9;border:2px dashed #8bc34a;border-radius:18px;padding:14px 16px;margin:16px 0;text-align:center}
-    .mission .label{font-size:13px;color:#4e7c52;font-weight:700}
-    .mission .task{font-size:30px;font-weight:900;color:var(--green);margin-top:4px}
-    .mission .self{margin-top:8px;color:#315838;font-size:14px;font-weight:700}
-    .feedback{min-height:54px;border-radius:16px;padding:14px 16px;font-size:18px;font-weight:900;text-align:center;display:flex;align-items:center;justify-content:center;background:#f8faf8;color:#607063;border:2px solid #e2ece3}
-    .feedback.ok{background:#e8f5e9;color:#1b5e20;border-color:#a5d6a7}
-    .feedback.warn{background:#fff3e0;color:#e65100;border-color:#ffcc80}
-    .feedback.err{background:#ffebee;color:#b71c1c;border-color:#ef9a9a}
-    .grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;margin-top:16px}
-    .coin-card{background:var(--card);border-radius:20px;padding:14px;box-shadow:var(--shadow);border:3px solid transparent;cursor:pointer;transition:.18s transform,.18s border-color,.18s background}
-    .coin-card:hover{transform:scale(1.02)}
-    .coin-card.correct{border-color:#66bb6a;background:#f0fff0}
-    .coin-card.wrong{border-color:#ef9a9a;background:#fff5f5}
-    .coin-img{width:100%;max-width:220px;aspect-ratio:1/1;object-fit:contain;display:block;margin:0 auto 10px}
-    .coin-name{text-align:center;font-size:18px;font-weight:900;color:#234026}
-    .coin-kind{text-align:center;font-size:13px;color:#6e8372;margin-top:2px}
-    .summary{margin-top:18px;background:#fff;border-radius:18px;padding:14px;box-shadow:var(--shadow)}
-    .summary h3{margin:0 0 8px;font-size:18px;color:#254529}
-    .summary ul{margin:0;padding-right:18px;color:#45624a;line-height:1.7}
+
+    .hero{
+      background:var(--card);
+      border-radius:24px;
+      padding:18px;
+      box-shadow:var(--shadow);
+      margin-bottom:16px;
+      text-align:center;
+    }
+
+    .hero h1{
+      margin:0 0 6px;
+      font-size:24px;
+    }
+
+    .hero p{
+      margin:0;
+      color:var(--muted);
+      font-size:15px;
+      line-height:1.5;
+    }
+
+    .toolbar{
+      display:flex;
+      gap:10px;
+      align-items:center;
+      justify-content:center;
+      margin-top:14px;
+      flex-wrap:wrap;
+    }
+
+    .speak-btn,.ghost-btn,.primary-btn,.continue-btn{
+      border:none;
+      border-radius:14px;
+      padding:12px 16px;
+      font-family:inherit;
+      font-weight:900;
+      cursor:pointer;
+    }
+
+    .speak-btn{
+      background:#fff7e6;
+      color:#8a5a00;
+      border:2px solid #ffd180;
+    }
+
+    .ghost-btn{
+      background:#edf4ff;
+      color:#1a56db;
+      border:2px solid #bcd2ff;
+    }
+
+    .primary-btn{
+      background:var(--green-2);
+      color:#fff;
+      box-shadow:0 5px 0 #1f5b22;
+    }
+
+    .primary-btn:active{
+      transform:translateY(3px);
+      box-shadow:0 2px 0 #1f5b22;
+    }
+
+    .continue-btn{
+      display:none;
+      background:var(--blue);
+      color:#fff;
+      box-shadow:0 5px 0 #1d4fb1;
+    }
+
+    .continue-btn:active{
+      transform:translateY(3px);
+      box-shadow:0 2px 0 #1d4fb1;
+    }
+
+    .mission{
+      background:#e8f5e9;
+      border:2px dashed #8bc34a;
+      border-radius:18px;
+      padding:14px 16px;
+      margin:16px 0;
+      text-align:center;
+    }
+
+    .mission .label{
+      font-size:13px;
+      color:#4e7c52;
+      font-weight:700;
+    }
+
+    .mission .task{
+      font-size:30px;
+      font-weight:900;
+      color:var(--green);
+      margin-top:4px;
+    }
+
+    .mission .self{
+      margin-top:8px;
+      color:#315838;
+      font-size:14px;
+      font-weight:700;
+    }
+
+    .feedback{
+      min-height:54px;
+      border-radius:16px;
+      padding:14px 16px;
+      font-size:18px;
+      font-weight:900;
+      text-align:center;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      background:#f8faf8;
+      color:#607063;
+      border:2px solid #e2ece3;
+    }
+
+    .feedback.ok{
+      background:#e8f5e9;
+      color:#1b5e20;
+      border-color:#a5d6a7;
+    }
+
+    .feedback.warn{
+      background:#fff3e0;
+      color:#e65100;
+      border-color:#ffcc80;
+    }
+
+    .feedback.err{
+      background:#ffebee;
+      color:#b71c1c;
+      border-color:#ef9a9a;
+    }
+
+    .grid{
+      display:grid;
+      grid-template-columns:repeat(2,minmax(0,1fr));
+      gap:14px;
+      margin-top:16px;
+    }
+
+    .coin-card{
+      background:var(--card);
+      border-radius:20px;
+      padding:14px;
+      box-shadow:var(--shadow);
+      border:3px solid transparent;
+      cursor:pointer;
+      transition:.18s transform,.18s border-color,.18s background,.18s opacity;
+    }
+
+    .coin-card:hover{
+      transform:scale(1.02);
+    }
+
+    .coin-card.correct{
+      border-color:#66bb6a;
+      background:#f0fff0;
+    }
+
+    .coin-card.wrong{
+      border-color:#ef9a9a;
+      background:#fff5f5;
+    }
+
+    .coin-card.disabled{
+      pointer-events:none;
+      opacity:.82;
+    }
+
+    .coin-img{
+      width:100%;
+      max-width:220px;
+      aspect-ratio:1/1;
+      object-fit:contain;
+      display:block;
+      margin:0 auto 10px;
+    }
+
+    .coin-name{
+      text-align:center;
+      font-size:18px;
+      font-weight:900;
+      color:#234026;
+    }
+
+    .coin-kind{
+      text-align:center;
+      font-size:13px;
+      color:#6e8372;
+      margin-top:2px;
+    }
+
+    .summary{
+      margin-top:18px;
+      background:#fff;
+      border-radius:18px;
+      padding:14px;
+      box-shadow:var(--shadow);
+    }
+
+    .summary h3{
+      margin:0 0 8px;
+      font-size:18px;
+      color:#254529;
+    }
+
+    .summary ul{
+      margin:0;
+      padding-right:18px;
+      color:#45624a;
+      line-height:1.7;
+    }
+
+    .footer{
+      position:fixed;
+      bottom:6px;
+      left:0;
+      right:0;
+      text-align:center;
+      font-size:12px;
+      color:#6f6458;
+      background:rgba(255,255,255,.7);
+      backdrop-filter:blur(4px);
+      padding:4px 8px;
+    }
+
     @media (max-width:560px){
       .grid{grid-template-columns:1fr 1fr}
       .mission .task{font-size:24px}
@@ -81,9 +335,10 @@
       <h1>לומדים לזהות מטבעות ושטרות</h1>
       <p>חפש את הכסף שהתבקש. הסתכל טוב על כל האפשרויות, בדוק את הערך, ואז בחר.</p>
       <div class="toolbar">
-        <button class="speak-btn" id="speakBtn">🔊 הקרא שוב</button>
-        <button class="ghost-btn" id="toggleModeBtn">החלף: מטבעות / שטרות</button>
-        <button class="primary-btn" id="nextBtn">משימה חדשה</button>
+        <button class="speak-btn" id="speakBtn" type="button">🔊 הקרא שוב</button>
+        <button class="ghost-btn" id="toggleModeBtn" type="button">עבור לשטרות</button>
+        <button class="primary-btn" id="nextBtn" type="button">משימה חדשה</button>
+        <button class="continue-btn" id="continueBtn" type="button">המשך לשכונה ➜</button>
       </div>
     </div>
 
@@ -108,6 +363,8 @@
   </div>
 </div>
 
+<div class="footer">כל הזכויות שמורות ללי-את רטנר 2026 ©</div>
+
 <script>
 const assets = {
   coins: [
@@ -130,6 +387,7 @@ let mode = 'coins';
 let target = null;
 let currentPool = [];
 let currentInstruction = '';
+let roundFinished = false;
 
 function speak(text){
   if (!('speechSynthesis' in window)) return;
@@ -145,7 +403,7 @@ function shuffle(arr){
   return [...arr].sort(() => Math.random() - 0.5);
 }
 
-function setFeedback(text, kind=''){
+function setFeedback(text, kind = ''){
   const el = document.getElementById('feedback');
   el.textContent = text;
   el.className = 'feedback' + (kind ? ' ' + kind : '');
@@ -155,15 +413,41 @@ function getPool(){
   return mode === 'coins' ? assets.coins : assets.notes;
 }
 
+function updateModeButton(){
+  const btn = document.getElementById('toggleModeBtn');
+  btn.textContent = mode === 'coins' ? 'עבור לשטרות' : 'חזור למטבעות';
+}
+
+function setContinueVisible(visible){
+  document.getElementById('continueBtn').style.display = visible ? 'inline-block' : 'none';
+}
+
+function disableCards(){
+  document.querySelectorAll('.coin-card').forEach(el => {
+    el.classList.add('disabled');
+    el.disabled = true;
+  });
+}
+
 function nextRound(){
-  localStorage.setItem('currentStep', '1');
+  roundFinished = false;
+  setContinueVisible(false);
+
+  try {
+    localStorage.setItem('currentStep', '1');
+  } catch (e) {}
+
   const pool = getPool();
   currentPool = shuffle(pool).slice(0, Math.min(4, pool.length));
   target = currentPool[Math.floor(Math.random() * currentPool.length)];
+
   currentInstruction = mode === 'coins'
     ? `חפש את ${target.value}. בדוק את כל המטבעות ורק אז בחר.`
     : `חפש את השטר של ${target.value}. בדוק את כל השטרות ורק אז בחר.`;
-  document.getElementById('taskText').textContent = mode === 'coins' ? `מצא ${target.value}` : `מצא שטר של ${target.value}`;
+
+  document.getElementById('taskText').textContent =
+    mode === 'coins' ? `מצא ${target.value}` : `מצא שטר של ${target.value}`;
+
   renderGrid();
   setFeedback('הסתכל טוב על כל האפשרויות.', 'warn');
   speak(currentInstruction);
@@ -172,6 +456,7 @@ function nextRound(){
 function renderGrid(){
   const grid = document.getElementById('grid');
   grid.innerHTML = '';
+
   shuffle(currentPool).forEach(item => {
     const card = document.createElement('button');
     card.className = 'coin-card';
@@ -187,34 +472,55 @@ function renderGrid(){
 }
 
 function choose(card, item){
-  document.querySelectorAll('.coin-card').forEach(el => {
-    el.disabled = true;
-    if (el !== card) el.style.opacity = '0.8';
-  });
+  if (roundFinished) return;
+
+  roundFinished = true;
+  disableCards();
+
   if (item.value === target.value){
     card.classList.add('correct');
-    setFeedback(`כל הכבוד! זה באמת ${target.value}. ככה לומדים לזהות כסף אמיתי.`, 'ok');
-    speak(`כל הכבוד. זה ${target.value}. ככה מזהים כסף אמיתי.`);
+    setFeedback(`כל הכבוד! זה באמת ${target.value}. סיימת את המשימה.`, 'ok');
+    speak(`כל הכבוד. זה ${target.value}. סיימת את המשימה.`);
+
+    try {
+      localStorage.setItem('lastCompletedGame', 'coin-recognition.html');
+      localStorage.setItem('coinRecognitionCompleted', 'true');
+    } catch (e) {}
+
+    setContinueVisible(true);
   } else {
     card.classList.add('wrong');
-    setFeedback(`נסה שוב בפעם הבאה. חפש ${target.value} ובדוק את כל האפשרויות.`, 'err');
-    speak(`נסה שוב. חפש ${target.value}. בדוק את כל האפשרויות.`);
-    const correctCard = [...document.querySelectorAll('.coin-card')].find(el => el.querySelector('.coin-name').textContent === target.value);
+    setFeedback(`ננסה שוב. חפש ${target.value} ובדוק את כל האפשרויות.`, 'err');
+    speak(`ננסה שוב. חפש ${target.value}. בדוק את כל האפשרויות.`);
+
+    const correctCard = [...document.querySelectorAll('.coin-card')]
+      .find(el => el.querySelector('.coin-name').textContent === target.value);
+
     if (correctCard) correctCard.classList.add('correct');
+
+    setTimeout(() => {
+      nextRound();
+    }, 1800);
   }
 }
 
 function toggleMode(){
   mode = mode === 'coins' ? 'notes' : 'coins';
-  document.getElementById('toggleModeBtn').textContent = mode === 'coins' ? 'החלף: מטבעות / שטרות' : 'חזור למטבעות';
+  updateModeButton();
   nextRound();
+}
+
+function finishGame(){
+  window.location.href = 'index.html';
 }
 
 document.getElementById('nextBtn').addEventListener('click', nextRound);
 document.getElementById('toggleModeBtn').addEventListener('click', toggleMode);
 document.getElementById('speakBtn').addEventListener('click', () => speak(currentInstruction));
+document.getElementById('continueBtn').addEventListener('click', finishGame);
 
+updateModeButton();
 nextRound();
 </script>
-<div style="position:fixed;bottom:6px;left:0;right:0;text-align:center;font-size:12px;color:#6f6458">כל הזכויות שמורות ללי-את רטנר 2026 ©</div></body>
+</body>
 </html>
