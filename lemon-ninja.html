@@ -386,6 +386,7 @@
 
 <div class="footer">כל הזכויות שמורות ללי-את רטנר 2026 ©</div>
 
+<script src="wallet.js"></script>
 <script>
 const LEVELS = [
   { level:1, time:20, goal:8, spawnEvery:1100, moneyPerHit:1 },
@@ -423,10 +424,16 @@ function setFeedback(text, type='warn'){
 }
 
 function getWallet(){
+  if(window.AppState) return AppState.wallet();
   try { return Number(localStorage.getItem('walletAmount') || '0'); }
   catch(e){ return 0; }
 }
 function setWallet(n){
+  if(window.AppState){
+    const current = AppState.wallet();
+    AppState.addMoney(Math.round(n) - current);
+    return;
+  }
   try { localStorage.setItem('walletAmount', String(Math.max(0, Math.round(n)))); } catch(e){}
 }
 
@@ -546,8 +553,12 @@ function finishLevel(){
   const passed = hits >= conf.goal;
 
   if(passed){
-    const newWallet = getWallet() + earned;
-    setWallet(newWallet);
+    if(window.AppState){
+      AppState.addMoney(earned);
+    } else {
+      const newWallet = getWallet() + earned;
+      setWallet(newWallet);
+    }
     addClassPoints(conf.level * 5);
 
     try{
